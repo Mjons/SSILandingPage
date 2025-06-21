@@ -95,7 +95,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           className="relative z-10 text-center max-w-5xl mx-auto px-6"
           style={{ transform: `translateY(${Math.min(scrollY * 0.2, 200)}px)` }}
         >
-          <h1 className="text-7xl md:text-9xl font-bold mb-8 bg-gradient-to-r from-red-400 via-yellow-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-7xl md:text-9xl font-bold mb-8 bg-gradient-to-r from-red-400 via-yellow-400 to-cyan-400 bg-clip-text text-transparent" style={{ marginTop: '250px' }}>
             YOU ARE NOT CRAZY
           </h1>
           <p className="text-2xl md:text-3xl mb-8 text-gray-200 font-light">
@@ -1053,6 +1053,7 @@ function App() {
   const [canReset, setCanReset] = useState(true)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [resetCount, setResetCount] = useState(0) // Track resets for debugging
 
   useEffect(() => {
     // Detect mobile device
@@ -1092,49 +1093,28 @@ function App() {
       if (loopHeight > 0 && canReset && !isTransitioning) {
         const progress = currentScroll / loopHeight
 
-        // Mobile-specific thresholds - more conservative
-        const resetThreshold = isMobile ? 0.88 : 0.92
+        // TRULY INFINITE - Allow full content viewing before reset
+        const resetThreshold = isMobile ? 0.95 : 0.97 // Reset much later to see full invitation
         const isNearEnd = progress >= resetThreshold
-        const isInDarkestVoid = isInPerfectDarkZone
 
-        // Mobile safety check - ensure we don't reset too early
-        const totalScrollHeight = document.documentElement.scrollHeight
-        const windowHeight = window.innerHeight
-        const maxScrollPosition = totalScrollHeight - windowHeight
-        const safeToReset = currentScroll < maxScrollPosition * 0.95
+        // Simplified dark zone check - more lenient for infinite looping
+        const isInDarkOrNearDark = isInPerfectDarkZone || progress > 0.92
 
-        if (isNearEnd && isInDarkestVoid && safeToReset) {
+        // Remove restrictive safety checks that prevent infinite looping
+        const shouldReset = isNearEnd && isInDarkOrNearDark
+
+        if (shouldReset) {
           setCanReset(false)
           setIsTransitioning(true)
+          setResetCount(prev => prev + 1)
 
-          // Mobile-optimized reset sequence
-          if (isMobile) {
-            // For mobile: immediate reset without fade for better performance
-            requestAnimationFrame(() => {
-              window.scrollTo({ top: 0, behavior: 'instant' })
-              setTimeout(() => {
-                setIsTransitioning(false)
-                setCanReset(true)
-              }, 100)
-            })
-          } else {
-            // Desktop: smooth fade transition
-            requestAnimationFrame(() => {
-              document.body.style.transition = 'opacity 0.05s ease-out'
-              document.body.style.opacity = '0.98'
-
-              setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'instant' })
-                document.body.style.opacity = '1'
-                document.body.style.transition = ''
-
-                setTimeout(() => {
-                  setIsTransitioning(false)
-                  setCanReset(true)
-                }, 150)
-              }, 16)
-            })
-          }
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+            setTimeout(() => {
+              setIsTransitioning(false)
+              setCanReset(true)
+            }, 20) // Super fast backup reset
+          })
         }
       }
     }
@@ -1156,16 +1136,16 @@ function App() {
           }
         })
 
-        // More lenient threshold for mobile
-        const threshold = isMobile ? 0.85 : 0.95
+        // More lenient threshold to allow full content viewing
+        const threshold = isMobile ? 0.7 : 0.8 // Higher threshold for better user experience
         inDarkZone = darkZoneIntensity >= threshold
         setIsInPerfectDarkZone(inDarkZone)
       },
       {
         threshold: isMobile
-          ? [0.7, 0.8, 0.85, 0.9]
-          : [0.9, 0.95, 0.98, 1.0],
-        rootMargin: isMobile ? '-20px' : '-5px'
+          ? [0.5, 0.7, 0.8, 0.9]
+          : [0.6, 0.7, 0.8, 0.9], // Higher thresholds for better content viewing
+        rootMargin: isMobile ? '0px' : '0px' // Standard margins
       }
     )
 
@@ -1192,6 +1172,30 @@ function App() {
       window.addEventListener('touchend', handleScroll, scrollOptions)
     }
 
+    // BACKUP INFINITE LOOP MECHANISM - Ensures it NEVER stops
+    const backupResetInterval = setInterval(() => {
+      if (loopHeight > 0 && canReset && !isTransitioning) {
+        const currentScroll = window.scrollY
+        const progress = currentScroll / loopHeight
+
+        // If we're past 98% and haven't reset in a while, force reset
+        if (progress >= 0.98) {
+          console.log('🔄 BACKUP INFINITE RESET TRIGGERED at', Math.round(progress * 100), '%')
+          setCanReset(false)
+          setIsTransitioning(true)
+          setResetCount(prev => prev + 1)
+
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+            setTimeout(() => {
+              setIsTransitioning(false)
+              setCanReset(true)
+            }, 20) // Super fast backup reset
+          })
+        }
+      }
+    }, 1000) // Check every second for backup reset
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', measureLoop)
@@ -1204,6 +1208,7 @@ function App() {
       }
 
       darkZoneObserver.disconnect()
+      clearInterval(backupResetInterval)
     }
   }, [containerRef, loopHeight, isInPerfectDarkZone, canReset, isTransitioning, isMobile])
 
@@ -1262,12 +1267,15 @@ function App() {
         }`}>
         <div className="flex items-center space-x-2">
           <div className={`w-2 h-2 rounded-full transition-all duration-200 ${isTransitioning
-              ? 'bg-purple-400 animate-spin'
-              : isInPerfectDarkZone
-                ? 'bg-green-400 animate-pulse shadow-green-400/50 shadow-lg'
-                : 'bg-cyan-400'
+            ? 'bg-purple-400 animate-spin'
+            : isInPerfectDarkZone
+              ? 'bg-green-400 animate-pulse shadow-green-400/50 shadow-lg'
+              : 'bg-cyan-400'
             }`}></div>
           <span>∞ {isMobile ? 'Loop' : 'Infinite Loop'}</span>
+          {resetCount > 0 && (
+            <span className="text-yellow-400 text-xs">#{resetCount}</span>
+          )}
           {isInPerfectDarkZone && !isTransitioning && (
             <span className="text-green-400 text-xs">Void</span>
           )}
