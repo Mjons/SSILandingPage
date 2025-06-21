@@ -1052,62 +1052,94 @@ function App() {
   const [loopHeight, setLoopHeight] = useState(0)
   const [canReset, setCanReset] = useState(true)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        window.innerWidth <= 768 ||
+        'ontouchstart' in window
+      setIsMobile(mobile)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     if (!containerRef) return
 
-    // Measure single loop height with precision
+    // Enhanced mobile-friendly height measurement
     const measureLoop = () => {
       const firstLoop = containerRef.querySelector('.loop-content')
       if (firstLoop) {
-        const height = firstLoop.getBoundingClientRect().height
+        // More accurate height calculation for mobile
+        const rect = firstLoop.getBoundingClientRect()
+        const computedHeight = window.getComputedStyle(firstLoop).height
+        const height = Math.max(rect.height, parseInt(computedHeight))
         setLoopHeight(height)
       }
     }
 
     measureLoop()
     window.addEventListener('resize', measureLoop)
+    window.addEventListener('orientationchange', measureLoop)
 
-    // Ultra-smooth scroll handler with imperceptible reset
+    // Mobile-optimized scroll handler
     const handleScroll = () => {
       const currentScroll = window.scrollY
       setScrollPosition(currentScroll)
 
       if (loopHeight > 0 && canReset && !isTransitioning) {
-        // Enhanced detection - multiple conditions for perfect timing
         const progress = currentScroll / loopHeight
-        const isNearEnd = progress >= 0.92 // Start earlier
+
+        // Mobile-specific thresholds - more conservative
+        const resetThreshold = isMobile ? 0.88 : 0.92
+        const isNearEnd = progress >= resetThreshold
         const isInDarkestVoid = isInPerfectDarkZone
 
-        if (isNearEnd && isInDarkestVoid) {
+        // Mobile safety check - ensure we don't reset too early
+        const totalScrollHeight = document.documentElement.scrollHeight
+        const windowHeight = window.innerHeight
+        const maxScrollPosition = totalScrollHeight - windowHeight
+        const safeToReset = currentScroll < maxScrollPosition * 0.95
+
+        if (isNearEnd && isInDarkestVoid && safeToReset) {
           setCanReset(false)
           setIsTransitioning(true)
 
-          // Multi-phase imperceptible reset
-          requestAnimationFrame(() => {
-            // Phase 1: Micro fade to enhance invisibility
-            document.body.style.transition = 'opacity 0.05s ease-out'
-            document.body.style.opacity = '0.98'
-
-            setTimeout(() => {
-              // Phase 2: Instant reset during micro-fade
+          // Mobile-optimized reset sequence
+          if (isMobile) {
+            // For mobile: immediate reset without fade for better performance
+            requestAnimationFrame(() => {
               window.scrollTo({ top: 0, behavior: 'instant' })
-
-              // Phase 3: Immediate restore
-              document.body.style.opacity = '1'
-              document.body.style.transition = ''
-
               setTimeout(() => {
                 setIsTransitioning(false)
                 setCanReset(true)
-              }, 150)
-            }, 16) // Single frame delay for perfect timing
-          })
+              }, 100)
+            })
+          } else {
+            // Desktop: smooth fade transition
+            requestAnimationFrame(() => {
+              document.body.style.transition = 'opacity 0.05s ease-out'
+              document.body.style.opacity = '0.98'
+
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'instant' })
+                document.body.style.opacity = '1'
+                document.body.style.transition = ''
+
+                setTimeout(() => {
+                  setIsTransitioning(false)
+                  setCanReset(true)
+                }, 150)
+              }, 16)
+            })
+          }
         }
       }
     }
 
-    // Ultra-precise dark zone detection with multiple thresholds
+    // Enhanced dark zone detection with mobile optimization
     const darkZoneObserver = new IntersectionObserver(
       (entries) => {
         let inDarkZone = false
@@ -1124,17 +1156,20 @@ function App() {
           }
         })
 
-        // Only consider it dark zone if we have 95%+ coverage
-        inDarkZone = darkZoneIntensity >= 0.95
+        // More lenient threshold for mobile
+        const threshold = isMobile ? 0.85 : 0.95
+        inDarkZone = darkZoneIntensity >= threshold
         setIsInPerfectDarkZone(inDarkZone)
       },
       {
-        threshold: [0.9, 0.95, 0.98, 1.0], // Multiple precision points
-        rootMargin: '-5px' // Even tighter precision
+        threshold: isMobile
+          ? [0.7, 0.8, 0.85, 0.9]
+          : [0.9, 0.95, 0.98, 1.0],
+        rootMargin: isMobile ? '-20px' : '-5px'
       }
     )
 
-    // Enhanced observation with retry mechanism
+    // Enhanced observation with mobile-specific retry timing
     const observeDarkZones = () => {
       const zones = containerRef.querySelectorAll('.dark-transition-zone')
       zones.forEach((zone) => {
@@ -1142,37 +1177,55 @@ function App() {
       })
     }
 
-    // Multiple observation attempts for reliability
-    setTimeout(observeDarkZones, 50)
-    setTimeout(observeDarkZones, 200)
-    setTimeout(observeDarkZones, 500)
+    // Mobile needs more time for DOM rendering
+    const delays = isMobile ? [100, 300, 800] : [50, 200, 500]
+    delays.forEach(delay => {
+      setTimeout(observeDarkZones, delay)
+    })
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Mobile-specific event listeners
+    const scrollOptions = { passive: true }
+    window.addEventListener('scroll', handleScroll, scrollOptions)
+
+    if (isMobile) {
+      window.addEventListener('touchmove', handleScroll, scrollOptions)
+      window.addEventListener('touchend', handleScroll, scrollOptions)
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', measureLoop)
+      window.removeEventListener('resize', checkMobile)
+      window.removeEventListener('orientationchange', measureLoop)
+
+      if (isMobile) {
+        window.removeEventListener('touchmove', handleScroll)
+        window.removeEventListener('touchend', handleScroll)
+      }
+
       darkZoneObserver.disconnect()
     }
-  }, [containerRef, loopHeight, isInPerfectDarkZone, canReset, isTransitioning])
+  }, [containerRef, loopHeight, isInPerfectDarkZone, canReset, isTransitioning, isMobile])
 
   return (
     <div
       ref={setContainerRef}
       className="infinite-scroll-container min-h-screen bg-black text-white overflow-x-hidden"
       style={{
-        // Maximum GPU acceleration and smoothness
+        // Mobile-optimized performance
         willChange: 'scroll-position',
         backfaceVisibility: 'hidden',
         perspective: '1000px',
         transform: 'translateZ(0)',
-        // Eliminate any potential flicker
         WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale'
+        MozOsxFontSmoothing: 'grayscale',
+        // Mobile-specific optimizations
+        WebkitOverflowScrolling: 'touch',
+        WebkitTransform: 'translate3d(0,0,0)'
       }}
     >
-      {/* Invisible Transition Overlay */}
-      {isTransitioning && (
+      {/* Mobile transition overlay - simpler for performance */}
+      {isTransitioning && !isMobile && (
         <div className="fixed inset-0 bg-black opacity-0 z-[9999] pointer-events-none transition-opacity duration-75"></div>
       )}
 
@@ -1181,16 +1234,16 @@ function App() {
         <MainContent loopId="" scrollOffset={0} />
       </div>
 
-      {/* Seamless Duplicate - Pre-loaded for instant access */}
-      {scrollPosition > loopHeight * 0.7 && (
+      {/* Mobile-optimized duplicate rendering */}
+      {scrollPosition > loopHeight * (isMobile ? 0.6 : 0.7) && (
         <div className="loop-content-duplicate">
           <MainContent loopId="-∞" scrollOffset={0} />
         </div>
       )}
 
-      {/* Enhanced Visual Continuity - Subtle cosmic particles that persist through transition */}
+      {/* Mobile-optimized visual continuity */}
       <div className="fixed inset-0 pointer-events-none z-[100]">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: isMobile ? 4 : 8 }).map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-20 animate-pulse"
@@ -1204,8 +1257,9 @@ function App() {
         ))}
       </div>
 
-      {/* Ultra-Minimal Status */}
-      <div className="fixed bottom-4 left-4 z-50 bg-black/95 text-cyan-200 px-4 py-2 rounded-full text-xs backdrop-blur border border-cyan-500/20">
+      {/* Mobile-friendly status indicator */}
+      <div className={`fixed bottom-4 left-4 z-50 bg-black/95 text-cyan-200 px-4 py-2 rounded-full text-xs backdrop-blur border border-cyan-500/20 ${isMobile ? 'text-xs' : ''
+        }`}>
         <div className="flex items-center space-x-2">
           <div className={`w-2 h-2 rounded-full transition-all duration-200 ${isTransitioning
               ? 'bg-purple-400 animate-spin'
@@ -1213,12 +1267,12 @@ function App() {
                 ? 'bg-green-400 animate-pulse shadow-green-400/50 shadow-lg'
                 : 'bg-cyan-400'
             }`}></div>
-          <span>∞ Infinite Loop</span>
+          <span>∞ {isMobile ? 'Loop' : 'Infinite Loop'}</span>
           {isInPerfectDarkZone && !isTransitioning && (
             <span className="text-green-400 text-xs">Void</span>
           )}
           {isTransitioning && (
-            <span className="text-purple-400 text-xs">Cycling...</span>
+            <span className="text-purple-400 text-xs">Reset</span>
           )}
         </div>
       </div>
