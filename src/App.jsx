@@ -88,8 +88,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         {/* Starfield Background */}
         <StarfieldBackground isWarpActive={isWarpActive} />
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Light overlay for text readability - reduced opacity */}
+        <div className="absolute inset-0 bg-black/10" />
 
         <div
           className="relative z-10 text-center max-w-5xl mx-auto px-6"
@@ -561,7 +561,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         )}
 
         {/* Perfect Dark Transition Zone - Invisible reset point */}
-        <div className="dark-transition-zone absolute inset-0 pointer-events-none opacity-0 bg-black"></div>
+        <div className="dark-transition-zone absolute inset-0 pointer-events-none opacity-0"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
@@ -982,7 +982,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           backgroundPosition: 'center'
         }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/20" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
             The <span className="text-cyan-400">Invitation</span>
@@ -1022,10 +1022,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
       {/* Extended Dark Space After Final Content - Perfect Transition Zone */}
       <div className="dark-transition-zone h-screen bg-black flex items-center justify-center opacity-100">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-50"></div>
         <div className="relative z-10 text-center">
           <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mx-auto mb-4"></div>
-          <p className="text-cyan-200 text-sm opacity-30">Consciousness Cycling...</p>
+          <p className="text-cyan-200 text-sm opacity-60">Consciousness Cycling...</p>
         </div>
       </div>
 
@@ -1229,10 +1228,7 @@ function App() {
         WebkitTransform: 'translate3d(0,0,0)'
       }}
     >
-      {/* Mobile transition overlay - simpler for performance */}
-      {isTransitioning && !isMobile && (
-        <div className="fixed inset-0 bg-black opacity-0 z-[9999] pointer-events-none transition-opacity duration-75"></div>
-      )}
+      {/* Mobile transition overlay - removed to prevent dimming */}
 
       {/* Primary Loop */}
       <div className="loop-content">
