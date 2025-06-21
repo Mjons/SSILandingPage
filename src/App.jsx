@@ -998,9 +998,16 @@ function App() {
             </p>
           </div>
           <div className="mt-12 space-x-4">
-            <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105">
-              Explore the Universe
-            </Button>
+            <a
+              href="https://the-merge-engine.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105">
+                Explore the Universe
+              </Button>
+            </a>
             <Button
               variant="outline"
               className="border-gray-400 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg rounded-full transition-all duration-300"
