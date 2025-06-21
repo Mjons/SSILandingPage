@@ -15,7 +15,8 @@ import portalInvitation from './assets/portal-invitation.png'
 import soulPerspective from './assets/Soul-10B-Perspective.png'
 import personalJourney from './assets/SSI-Personal-Journey.png'
 
-function App() {
+// Main Content Component (extracted for infinite duplication)
+function MainContent({ loopId = '', scrollOffset = 0 }) {
   const [scrollY, setScrollY] = useState(0)
   const [isWarpActive, setIsWarpActive] = useState(false)
   const [showFlash, setShowFlash] = useState(false)
@@ -24,18 +25,18 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const newScrollY = window.scrollY;
+      const newScrollY = window.scrollY - scrollOffset;
       setScrollY(newScrollY);
 
       // Calculate sunrise progress based on section position with extended animation
-      const sunriseSection = document.getElementById('sunrise-transition');
+      const sunriseSection = document.getElementById(`sunrise-transition${loopId}`);
       if (sunriseSection) {
         const rect = sunriseSection.getBoundingClientRect();
-        const sectionTop = newScrollY + rect.top;
+        const sectionTop = window.scrollY + rect.top;
         const sectionHeight = rect.height;
 
         // Slow down the animation - spread it across the entire extended section
-        const rawProgress = Math.max(0, Math.min(1, (newScrollY - sectionTop + window.innerHeight) / sectionHeight));
+        const rawProgress = Math.max(0, Math.min(1, (window.scrollY - sectionTop + window.innerHeight) / sectionHeight));
 
         // Apply easing to make the animation even more gradual
         const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress); // Smooth step function
@@ -44,14 +45,14 @@ function App() {
       }
 
       // Calculate reverse sunset progress for Simultaneous Experiences transition
-      const reverseSunsetSection = document.getElementById('reverse-sunset-transition');
+      const reverseSunsetSection = document.getElementById(`reverse-sunset-transition${loopId}`);
       if (reverseSunsetSection) {
         const rect = reverseSunsetSection.getBoundingClientRect();
-        const sectionTop = newScrollY + rect.top;
+        const sectionTop = window.scrollY + rect.top;
         const sectionHeight = rect.height;
 
         // Similar calculation but for reverse animation
-        const rawProgress = Math.max(0, Math.min(1, (newScrollY - sectionTop + window.innerHeight) / sectionHeight));
+        const rawProgress = Math.max(0, Math.min(1, (window.scrollY - sectionTop + window.innerHeight) / sectionHeight));
         const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
 
         setReverseSunsetProgress(easedProgress);
@@ -60,7 +61,7 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [])
+  }, [loopId, scrollOffset])
 
   const activateWarp = () => {
     setIsWarpActive(true)
@@ -74,11 +75,11 @@ function App() {
   }
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(`${sectionId}${loopId}`)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <>
       {/* Warp Flash Effect */}
       <WarpFlash isActive={showFlash} />
 
@@ -155,7 +156,7 @@ function App() {
       <div className="h-32 bg-black"></div>
 
       {/* Stop Dismissing Section */}
-      <section id="stop-dismissing" className="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
+      <section id={`stop-dismissing${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-red-400">
@@ -282,7 +283,7 @@ function App() {
       </section>
 
       {/* The First Shock Section */}
-      <section id="first-shock" className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
+      <section id={`first-shock${loopId}`} className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-yellow-400">
@@ -321,7 +322,7 @@ function App() {
       </section>
 
       {/* The Second Shock Section */}
-      <section id="second-shock" className="py-20 px-6 bg-gradient-to-b from-black to-purple-900">
+      <section id={`second-shock${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-purple-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-purple-400">
@@ -376,7 +377,7 @@ function App() {
       </section>
 
       {/* Why Now Section */}
-      <section id="why-now" className="py-20 px-6 bg-gradient-to-b from-purple-900 to-black">
+      <section id={`why-now${loopId}`} className="py-20 px-6 bg-gradient-to-b from-purple-900 to-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-cyan-400">
@@ -445,7 +446,7 @@ function App() {
       </section>
 
       {/* The Invitation Section */}
-      <section id="the-invitation" className="py-20 px-6 bg-gradient-to-b from-black to-blue-900">
+      <section id={`the-invitation${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-blue-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-blue-400">
@@ -518,7 +519,7 @@ function App() {
 
       {/* Sunrise Transition Section - Extended height for longer animation */}
       <section
-        id="sunrise-transition"
+        id={`sunrise-transition${loopId}`}
         className="relative overflow-hidden z-20"
         style={{
           height: '300vh', // Make it 3x taller for a longer scroll experience
@@ -553,13 +554,14 @@ function App() {
       </section>
 
       {/* Central Observer Section */}
-      <section id="central-observer" className="relative py-20 px-6 bg-black z-30">
+      <section id={`central-observer${loopId}`} className="relative py-20 px-6 bg-black z-30">
         {/* Static starfield background that continues from transition */}
         {sunriseProgress > 0.5 && (
-          <div className="absolute inset-0 pointer-events-none z-0">
-            <StaticStarfield opacity={1} />
-          </div>
+          <StaticStarfield />
         )}
+
+        {/* Perfect Dark Transition Zone - Invisible reset point */}
+        <div className="dark-transition-zone absolute inset-0 pointer-events-none opacity-0 bg-black"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
@@ -797,7 +799,7 @@ function App() {
 
       {/* Reverse Sunset Transition Section - Upside-down sunset with stars */}
       <section
-        id="reverse-sunset-transition"
+        id={`reverse-sunset-transition${loopId}`}
         className="relative overflow-hidden z-20 bg-gray-900"
         style={{
           height: '300vh', // Make it 3x taller for a longer scroll experience
@@ -1018,6 +1020,15 @@ function App() {
         </div>
       </section>
 
+      {/* Extended Dark Space After Final Content - Perfect Transition Zone */}
+      <div className="dark-transition-zone h-screen bg-black flex items-center justify-center opacity-100">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-50"></div>
+        <div className="relative z-10 text-center">
+          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mx-auto mb-4"></div>
+          <p className="text-cyan-200 text-sm opacity-30">Consciousness Cycling...</p>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="py-12 px-6 bg-black border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center">
@@ -1029,6 +1040,188 @@ function App() {
           </p>
         </div>
       </footer>
+    </>
+  )
+}
+
+// Infinite Scroll Wrapper Component
+function App() {
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const [containerRef, setContainerRef] = useState(null)
+  const [isInPerfectDarkZone, setIsInPerfectDarkZone] = useState(false)
+  const [loopHeight, setLoopHeight] = useState(0)
+  const [canReset, setCanReset] = useState(true)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  useEffect(() => {
+    if (!containerRef) return
+
+    // Measure single loop height with precision
+    const measureLoop = () => {
+      const firstLoop = containerRef.querySelector('.loop-content')
+      if (firstLoop) {
+        const height = firstLoop.getBoundingClientRect().height
+        setLoopHeight(height)
+      }
+    }
+
+    measureLoop()
+    window.addEventListener('resize', measureLoop)
+
+    // Ultra-smooth scroll handler with imperceptible reset
+    const handleScroll = () => {
+      const currentScroll = window.scrollY
+      setScrollPosition(currentScroll)
+
+      if (loopHeight > 0 && canReset && !isTransitioning) {
+        // Enhanced detection - multiple conditions for perfect timing
+        const progress = currentScroll / loopHeight
+        const isNearEnd = progress >= 0.92 // Start earlier
+        const isInDarkestVoid = isInPerfectDarkZone
+
+        if (isNearEnd && isInDarkestVoid) {
+          setCanReset(false)
+          setIsTransitioning(true)
+
+          // Multi-phase imperceptible reset
+          requestAnimationFrame(() => {
+            // Phase 1: Micro fade to enhance invisibility
+            document.body.style.transition = 'opacity 0.05s ease-out'
+            document.body.style.opacity = '0.98'
+
+            setTimeout(() => {
+              // Phase 2: Instant reset during micro-fade
+              window.scrollTo({ top: 0, behavior: 'instant' })
+
+              // Phase 3: Immediate restore
+              document.body.style.opacity = '1'
+              document.body.style.transition = ''
+
+              setTimeout(() => {
+                setIsTransitioning(false)
+                setCanReset(true)
+              }, 150)
+            }, 16) // Single frame delay for perfect timing
+          })
+        }
+      }
+    }
+
+    // Ultra-precise dark zone detection with multiple thresholds
+    const darkZoneObserver = new IntersectionObserver(
+      (entries) => {
+        let inDarkZone = false
+        let darkZoneIntensity = 0
+
+        entries.forEach((entry) => {
+          if (entry.target.classList.contains('dark-transition-zone')) {
+            if (entry.isIntersecting) {
+              const intensity = entry.intersectionRatio
+              if (intensity > darkZoneIntensity) {
+                darkZoneIntensity = intensity
+              }
+            }
+          }
+        })
+
+        // Only consider it dark zone if we have 95%+ coverage
+        inDarkZone = darkZoneIntensity >= 0.95
+        setIsInPerfectDarkZone(inDarkZone)
+      },
+      {
+        threshold: [0.9, 0.95, 0.98, 1.0], // Multiple precision points
+        rootMargin: '-5px' // Even tighter precision
+      }
+    )
+
+    // Enhanced observation with retry mechanism
+    const observeDarkZones = () => {
+      const zones = containerRef.querySelectorAll('.dark-transition-zone')
+      zones.forEach((zone) => {
+        darkZoneObserver.observe(zone)
+      })
+    }
+
+    // Multiple observation attempts for reliability
+    setTimeout(observeDarkZones, 50)
+    setTimeout(observeDarkZones, 200)
+    setTimeout(observeDarkZones, 500)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', measureLoop)
+      darkZoneObserver.disconnect()
+    }
+  }, [containerRef, loopHeight, isInPerfectDarkZone, canReset, isTransitioning])
+
+  return (
+    <div
+      ref={setContainerRef}
+      className="infinite-scroll-container min-h-screen bg-black text-white overflow-x-hidden"
+      style={{
+        // Maximum GPU acceleration and smoothness
+        willChange: 'scroll-position',
+        backfaceVisibility: 'hidden',
+        perspective: '1000px',
+        transform: 'translateZ(0)',
+        // Eliminate any potential flicker
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
+      }}
+    >
+      {/* Invisible Transition Overlay */}
+      {isTransitioning && (
+        <div className="fixed inset-0 bg-black opacity-0 z-[9999] pointer-events-none transition-opacity duration-75"></div>
+      )}
+
+      {/* Primary Loop */}
+      <div className="loop-content">
+        <MainContent loopId="" scrollOffset={0} />
+      </div>
+
+      {/* Seamless Duplicate - Pre-loaded for instant access */}
+      {scrollPosition > loopHeight * 0.7 && (
+        <div className="loop-content-duplicate">
+          <MainContent loopId="-∞" scrollOffset={0} />
+        </div>
+      )}
+
+      {/* Enhanced Visual Continuity - Subtle cosmic particles that persist through transition */}
+      <div className="fixed inset-0 pointer-events-none z-[100]">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-20 animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Ultra-Minimal Status */}
+      <div className="fixed bottom-4 left-4 z-50 bg-black/95 text-cyan-200 px-4 py-2 rounded-full text-xs backdrop-blur border border-cyan-500/20">
+        <div className="flex items-center space-x-2">
+          <div className={`w-2 h-2 rounded-full transition-all duration-200 ${isTransitioning
+              ? 'bg-purple-400 animate-spin'
+              : isInPerfectDarkZone
+                ? 'bg-green-400 animate-pulse shadow-green-400/50 shadow-lg'
+                : 'bg-cyan-400'
+            }`}></div>
+          <span>∞ Infinite Loop</span>
+          {isInPerfectDarkZone && !isTransitioning && (
+            <span className="text-green-400 text-xs">Void</span>
+          )}
+          {isTransitioning && (
+            <span className="text-purple-400 text-xs">Cycling...</span>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
