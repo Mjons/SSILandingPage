@@ -1035,27 +1035,28 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               }}
             />
 
-            {/* Inner energy core */}
+            {/* Inner energy core - more ethereal */}
             <div
-              className="absolute inset-16 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-500 opacity-20"
+              className="absolute inset-20 rounded-full opacity-15"
               style={{
                 animation: 'cosmicBreath 4s ease-in-out infinite alternate',
-                filter: 'blur(8px)'
+                background: 'radial-gradient(circle at center, rgba(6, 182, 212, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 80%)',
+                filter: 'blur(12px)'
               }}
             />
 
-            {/* Particle streams */}
-            {Array.from({ length: 8 }).map((_, i) => (
+            {/* Particle streams - more subtle */}
+            {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-8 bg-cyan-400 opacity-50"
+                className="absolute w-0.5 h-6 bg-cyan-400 opacity-30"
                 style={{
                   left: '50%',
                   top: '50%',
-                  transformOrigin: '0 200px',
-                  transform: `rotate(${i * 45}deg) translateY(-200px)`,
-                  animation: `cosmicStream 2s linear infinite`,
-                  animationDelay: `${i * 0.25}s`,
+                  transformOrigin: '0 180px',
+                  transform: `rotate(${i * 60}deg) translateY(-180px)`,
+                  animation: `cosmicStream 3s linear infinite`,
+                  animationDelay: `${i * 0.5}s`,
                   borderRadius: '50%'
                 }}
               />
