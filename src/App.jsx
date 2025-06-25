@@ -991,29 +991,101 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           `
         }}
       >
-        {/* Subtle animated particles */}
+        {/* COSMIC PORTAL - Perfect for transparent WebM! */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+
+          {/* REPLACE THIS CSS VERSION WITH WebM VIDEO: */}
+          {/* 
+          <video 
+            className="w-96 h-96 opacity-60" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            style={{
+              mixBlendMode: 'screen', // Perfect for transparent WebM!
+              filter: 'hue-rotate(180deg) saturate(1.2)'
+            }}
+          >
+            <source src="/cosmic-portal.webm" type="video/webm" />
+          </video>
+          */}
+
+          <div className="cosmic-portal-container" style={{
+            width: '400px',
+            height: '400px',
+            position: 'relative',
+            opacity: 0.6
+          }}>
+            {/* Outer rotating ring */}
+            <div
+              className="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-30"
+              style={{
+                animation: 'cosmicRotate 20s linear infinite',
+                background: 'conic-gradient(from 0deg, transparent, rgba(6, 182, 212, 0.3), transparent, rgba(139, 92, 246, 0.3), transparent)'
+              }}
+            />
+
+            {/* Middle pulsing ring */}
+            <div
+              className="absolute inset-8 rounded-full border border-purple-400 opacity-40"
+              style={{
+                animation: 'cosmicPulse 3s ease-in-out infinite alternate',
+                background: 'radial-gradient(circle at center, transparent 40%, rgba(139, 92, 246, 0.2) 70%, transparent 100%)'
+              }}
+            />
+
+            {/* Inner energy core */}
+            <div
+              className="absolute inset-16 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-500 opacity-20"
+              style={{
+                animation: 'cosmicBreath 4s ease-in-out infinite alternate',
+                filter: 'blur(8px)'
+              }}
+            />
+
+            {/* Particle streams */}
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-8 bg-cyan-400 opacity-50"
+                style={{
+                  left: '50%',
+                  top: '50%',
+                  transformOrigin: '0 200px',
+                  transform: `rotate(${i * 45}deg) translateY(-200px)`,
+                  animation: `cosmicStream 2s linear infinite`,
+                  animationDelay: `${i * 0.25}s`,
+                  borderRadius: '50%'
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Enhanced animated particles */}
         <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 12 }).map((_, i) => (
+          {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-20 animate-pulse"
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-40 animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 4}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                animationDuration: `${2 + Math.random() * 3}s`
               }}
             />
           ))}
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 15 }).map((_, i) => (
             <div
               key={`star-${i}`}
-              className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-30 animate-pulse"
+              className="absolute w-0.5 h-0.5 bg-purple-300 rounded-full opacity-30 animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 6}s`,
-                animationDuration: `${4 + Math.random() * 3}s`
+                animationDuration: `${3 + Math.random() * 2}s`
               }}
             />
           ))}
