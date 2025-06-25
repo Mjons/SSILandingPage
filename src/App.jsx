@@ -975,14 +975,65 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
       {/* Call to Action Section */}
       <section
-        className="py-20 px-6 relative"
+        className="py-20 px-6 relative overflow-hidden"
         style={{
-          backgroundImage: `url(${portalInvitation})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          background: `
+            radial-gradient(ellipse at center top, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+            linear-gradient(135deg, 
+              rgba(0, 0, 0, 0.95) 0%, 
+              rgba(15, 23, 42, 0.9) 25%, 
+              rgba(30, 41, 59, 0.85) 50%, 
+              rgba(15, 23, 42, 0.9) 75%, 
+              rgba(0, 0, 0, 0.95) 100%
+            )
+          `
         }}
       >
-        <div className="absolute inset-0 bg-black/20" />
+        {/* Subtle animated particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-20 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={`star-${i}`}
+              className="absolute w-0.5 h-0.5 bg-blue-300 rounded-full opacity-30 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 6}s`,
+                animationDuration: `${4 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Consciousness wave effect */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            background: `repeating-linear-gradient(
+              90deg,
+              transparent,
+              transparent 40px,
+              rgba(59, 130, 246, 0.3) 42px,
+              rgba(59, 130, 246, 0.3) 44px,
+              transparent 46px,
+              transparent 140px
+            )`
+          }}
+        />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
             The <span className="text-cyan-400">Invitation</span>
@@ -1017,6 +1068,53 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               Return to Sleep
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Email Capture Section */}
+      <section className="py-16 px-6 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
+        {/* Subtle background effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-0.5 h-0.5 bg-blue-400 rounded-full opacity-30 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-2xl mx-auto text-center relative z-10">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+            Stay Connected to the <span className="text-cyan-400">Infinite</span>
+          </h3>
+          <p className="text-gray-300 mb-8 leading-relaxed">
+            Be the first to know about consciousness expansions, reality updates, and new pathways to awakening.
+          </p>
+
+          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="your.consciousness@reality.sim"
+              className="flex-1 px-4 py-3 rounded-full bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
+              required
+            />
+            <Button
+              type="submit"
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
+            >
+              Join the Network
+            </Button>
+          </form>
+
+          <p className="text-xs text-gray-500 mt-4">
+            No spam. Just consciousness. Unsubscribe from reality anytime.
+          </p>
         </div>
       </section>
 
