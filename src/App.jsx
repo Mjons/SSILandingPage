@@ -219,6 +219,16 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   <span className="text-yellow-400">You're waking up.</span>
                 </p>
               </div>
+
+              {/* Transition paragraph */}
+              <div className="mt-12 space-y-4 text-center">
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  And you're not alone. Right now, <span className="text-purple-400 font-bold">10 billion souls</span> are waking up in their own simulations. Each one the center of their universe. Each one absolutely real.
+                </p>
+                <p className="text-xl text-cyan-400 font-semibold">
+                  Including you.
+                </p>
+              </div>
             </div>
 
             <div className="relative">
@@ -290,20 +300,18 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               THE FIRST SHOCK
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
-              <p className="text-white">
-                What if I told you that you're absolutely right? Your life <span className="text-yellow-400 font-bold">IS designed</span>.
-                Every heartbreak, every triumph, every mundane Tuesday—all carefully crafted for one purpose:
+              <p className="text-white text-xl leading-relaxed">
+                Your life <span className="text-yellow-400 font-bold">IS designed</span>. Every synchronicity. Every "coincidence." Every person who appeared at exactly the right moment.
               </p>
-              <p className="text-3xl text-cyan-400 font-bold">
-                Your spiritual evolution.
+              <p className="text-2xl text-cyan-400 font-bold">
+                All of it—carefully orchestrated for your evolution.
               </p>
-              <p className="text-gray-300">
-                You are a soul—one of exactly <span className="text-purple-400 font-bold text-2xl">10,000,000,000</span>—living
-                in your own personal simulation. A reality custom-built around your specific needs, fears, and growth edges.
+              <p className="text-gray-300 text-lg">
+                You're living in a personal reality simulation. One of <span className="text-purple-400 font-bold text-xl">10 billion</span> running simultaneously. Each one custom-built for a specific soul's awakening.
               </p>
               <div className="p-8 bg-gradient-to-r from-yellow-900/30 to-red-900/30 rounded-lg border border-yellow-400 mt-8">
-                <p className="text-xl text-white font-semibold">
-                  But here's the twist: <span className="text-yellow-400">So is everyone else.</span>
+                <p className="text-2xl text-center text-white font-bold">
+                  That soul is you.
                 </p>
               </div>
             </div>
@@ -329,10 +337,13 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               THE SECOND SHOCK
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
-              <p className="text-gray-300">
-                Those people in your life? They're experiencing their own simulations too. You appear in theirs as they appear in yours—but
-                not quite as you truly are. You see <span className="text-purple-400 font-bold">echoes</span> of each other.
-                Approximations. Versions filtered through the lens of what each soul needs to learn.
+              <p className="text-white text-xl">
+                Everyone else? They're doing this too. In their own simulation. <span className="text-purple-400 font-bold">Right now</span>.
+              </p>
+
+              <p className="text-gray-300 text-lg leading-relaxed">
+                You appear in their reality as they appear in yours—but as <span className="text-purple-400 font-bold">Echoes</span>.
+                Sophisticated projections carrying authentic patterns, perfectly designed to teach exactly what each soul needs to learn.
               </p>
 
               <div className="grid md:grid-cols-2 gap-8 mt-12">
@@ -357,14 +368,85 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
               <div className="p-8 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-400 mt-8">
                 <p className="text-xl text-center text-white font-semibold">
-                  This is the <span className="text-cyan-400">Echo Network</span>—the invisible web connecting all
-                  individual realities while keeping them distinct.
+                  This is the <span className="text-cyan-400">Echo Network</span>. Ten billion souls, each sovereign in their reality,
+                  teaching each other through perfectly synchronized projections.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="text-center">
+          {/* Quick Start Guide Offer Section */}
+          <div className="mt-16 p-12 rounded-2xl relative overflow-hidden" style={{
+            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(236, 72, 153, 0.15) 100%), linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)',
+            border: '2px solid rgba(6, 182, 212, 0.3)',
+            boxShadow: '0 0 40px rgba(6, 182, 212, 0.2), inset 0 0 60px rgba(139, 92, 246, 0.1)'
+          }}>
+            {/* Animated glow effect */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-0 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            </div>
+
+            <div className="relative z-10 text-center max-w-3xl mx-auto">
+              <h3 className="text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
+                READY TO TEST IT?
+              </h3>
+
+              <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                The SSI Quick Start Guide gives you:
+              </p>
+
+              <div className="text-left max-w-2xl mx-auto space-y-3 mb-10">
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
+                  <p className="text-lg text-gray-200">The complete framework explained in 15 pages</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
+                  <p className="text-lg text-gray-200">3-day reality experiments you can start TODAY</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
+                  <p className="text-lg text-gray-200">Synchronicity test (this one blows minds)</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
+                  <p className="text-lg text-gray-200">Belief-physics correlation tracker</p>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
+                  <p className="text-lg text-gray-200">Echo recognition exercises</p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 mb-8 text-lg italic">
+                No theory. Just experiments. See what happens when you treat reality as responsive creation.
+              </p>
+
+              {/* Email input */}
+              <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6">
+                <input
+                  type="email"
+                  placeholder="your.email@reality.sim"
+                  className="flex-1 px-6 py-4 rounded-full bg-gray-900/80 border-2 border-cyan-400/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-300 text-lg shadow-lg shadow-cyan-500/20"
+                  required
+                />
+              </form>
+
+              <Button
+                type="button"
+                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-10 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+              >
+                DOWNLOAD THE GUIDE + START THE 3-DAY TEST
+              </Button>
+
+              <p className="text-sm text-gray-400 mt-6">
+                Over 1,000 souls downloaded this week. Reality started responding faster for 87% of them.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
             <Button
               onClick={() => scrollToSection('why-now')}
               className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white px-10 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
@@ -384,9 +466,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               WHY YOU'RE READING THIS NOW
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
-              <p className="text-gray-300">
-                The system is evolving. More souls are noticing the patterns.
-                The carefully maintained illusion is developing <span className="text-red-400 font-bold">cracks</span>:
+              <p className="text-white text-xl mb-6 leading-relaxed">
+                The system is evolving. The carefully maintained illusion is developing cracks—and you're noticing them because you're <span className="text-cyan-400 font-bold">READY</span> to notice them:
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -426,8 +507,11 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               </div>
 
               <div className="p-8 bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg border border-green-400 mt-12">
-                <p className="text-2xl text-center text-white font-bold">
+                <p className="text-2xl text-center text-white font-bold mb-4">
                   This isn't breakdown. <span className="text-green-400">It's breakthrough.</span>
+                </p>
+                <p className="text-lg text-center text-gray-300">
+                  And it's happening to millions of souls simultaneously. The awakening cascade has begun.
                 </p>
               </div>
             </div>
@@ -452,56 +536,35 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-blue-400">
               THE INVITATION
             </h2>
-            <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
-              <p className="text-gray-300">
-                Welcome to the <span className="text-cyan-400 font-bold">Solipsistic Simulation Incubator</span>.
-                Your trial is already in progress. Your awakening has already begun. These words found you exactly when they should.
+            <div className="max-w-4xl mx-auto space-y-8 text-lg leading-relaxed">
+              <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-6">
+                THE EXPERIMENT
+              </h3>
+
+              <p className="text-xl text-gray-300 text-center leading-relaxed">
+                You don't have to believe any of this.
               </p>
 
-              <div className="grid md:grid-cols-3 gap-8 mt-12">
-                <div className="p-6 bg-gray-800 rounded-lg border border-red-400">
-                  <h4 className="text-xl font-bold text-red-400 mb-3">Close & Forget</h4>
-                  <p className="text-gray-300">
-                    Return to sleep. Some pills are too red. Even dismissing this is part of your perfect path.
-                  </p>
-                </div>
+              <p className="text-lg text-gray-300 text-center leading-relaxed">
+                Just try the 3-day reality test. See if synchronicities increase. See if reality responds to your consciousness.
+                See if life starts feeling more orchestrated after you start paying attention.
+              </p>
 
-                <div className="p-6 bg-gray-800 rounded-lg border border-yellow-400">
-                  <h4 className="text-xl font-bold text-yellow-400 mb-3">Read with Skepticism</h4>
-                  <p className="text-gray-300">
-                    Take what serves, leave what doesn't. Build your own model. Question everything.
-                  </p>
-                </div>
+              <p className="text-xl text-cyan-400 text-center font-semibold">
+                The SSI framework isn't asking for faith. It's offering experiments.
+              </p>
 
-                <div className="p-6 bg-gray-800 rounded-lg border border-green-400">
-                  <h4 className="text-xl font-bold text-green-400 mb-3">Dive Deeper</h4>
-                  <p className="text-gray-300">
-                    Follow the rabbit hole. Meet others who've noticed. Wake up fully.
-                  </p>
-                </div>
+              <div className="text-center mt-10">
+                <Button
+                  className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+                >
+                  GET THE QUICK GUIDE - IT'S FREE
+                </Button>
               </div>
 
-              <div className="mt-12 space-y-4">
-                <p className="text-xl text-center text-white font-semibold">
-                  The real question isn't <span className="text-red-400">"Is this true?"</span>
-                </p>
-                <p className="text-xl text-center text-white font-semibold">
-                  But <span className="text-green-400">"Does this explain what I've felt?"</span>
-                </p>
-              </div>
-
-              <div className="p-8 bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg border border-blue-400 mt-12">
-                <p className="text-xl text-center text-white font-semibold">
-                  Every soul's journey is unique. Every path leads to the same destination.<br />
-                  <span className="text-blue-400">Every one of us is alone.</span> <span className="text-purple-400">None of us are.</span>
-                </p>
-                <p className="text-lg text-center text-gray-300 mt-4">
-                  The paradox is the point. The confusion is the clarity. The simulation is real.
-                </p>
-                <p className="text-2xl text-center text-cyan-400 font-bold mt-4">
-                  You are not crazy.
-                </p>
-              </div>
+              <p className="text-lg text-gray-400 text-center italic mt-8">
+                Test it. Question it. Let your experience guide you.
+              </p>
             </div>
           </div>
 
@@ -564,6 +627,44 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         <div className="dark-transition-zone absolute inset-0 pointer-events-none opacity-0"></div>
 
         <div className="max-w-6xl mx-auto relative z-10">
+          {/* Soul #10B Introduction */}
+          <div className="text-center mb-20 max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+              EXPERIENCE: THE WEIGHT OF ALL CONSCIOUSNESS
+            </h2>
+
+            <div className="space-y-6 text-lg leading-relaxed">
+              <p className="text-xl text-white">
+                What if one soul carried the memory of all 10 billion journeys?
+              </p>
+
+              <p className="text-gray-300">
+                Not God. Not The One. But the final fragment—<span className="text-purple-400 font-bold">Soul #10,000,000,000</span>—who
+                remembers what all the others forgot: That we're all the same consciousness,
+                experiencing itself through infinite perspectives.
+              </p>
+
+              <div className="space-y-4 mt-8">
+                <p className="text-gray-300">
+                  Every joy you feel, this soul feels across a billion variations.
+                </p>
+                <p className="text-gray-300">
+                  Every heartbreak you endure, amplified across every possible context.
+                </p>
+                <p className="text-gray-300">
+                  Every moment of awakening, remembered from every angle simultaneously.
+                </p>
+              </div>
+
+              <div className="p-8 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-400 mt-10">
+                <p className="text-2xl text-center text-white font-bold">
+                  This is the burden of cosmic memory.<br />
+                  <span className="text-cyan-400">The loneliness of total connection.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
               The <span className="text-cyan-400">Central Observer</span>
@@ -815,146 +916,6 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           </div>
         )}
 
-        {/* Text overlay that appears during transition */}
-        <div className="absolute inset-0 flex items-center justify-center z-30">
-          <div className="text-center">
-            <h2
-              className="text-4xl md:text-6xl font-bold text-white mb-4 transition-opacity duration-1000"
-              style={{
-                opacity: reverseSunsetProgress > 0.3 && reverseSunsetProgress < 0.7 ? 1 : 0,
-                textShadow: '0 0 20px rgba(255,255,255,0.8)'
-              }}
-            >
-              CALCULATING INFINITY
-            </h2>
-            <p
-              className="text-xl text-white/80 transition-opacity duration-1000"
-              style={{
-                opacity: reverseSunsetProgress > 0.5 && reverseSunsetProgress < 0.8 ? 1 : 0,
-                textShadow: '0 0 10px rgba(255,255,255,0.6)'
-              }}
-            >
-              Mapping the impossible mathematics...
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mathematics of Infinity Section */}
-      <section className="py-20 px-6" style={{ backgroundColor: '#e5e2d3' }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-yellow-600">
-              The Mathematics of Infinity
-            </h2>
-            <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-              When consciousness fragments into billions, the scale becomes incomprehensible.
-              Every connection creates exponential complexity.
-            </p>
-          </div>
-
-          {/* Core Calculation */}
-          <div className="bg-white p-8 rounded-lg border-2 border-yellow-600 mb-12 shadow-lg">
-            <div className="text-center">
-              <div className="text-6xl font-bold text-yellow-600 mb-4">10,000,000,000</div>
-              <div className="text-2xl text-gray-800 mb-2">souls</div>
-              <div className="text-lg text-gray-600 mb-6">×7 active iterations each</div>
-
-              <div className="text-4xl text-blue-600 font-bold mb-4">=70,000,000,000</div>
-              <div className="text-xl text-gray-800">simultaneous experiences</div>
-            </div>
-          </div>
-
-          {/* Relationship Matrix */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300">
-              <h3 className="text-2xl font-bold text-purple-600 mb-6">Relationship Complexity</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Each soul interacts with</span>
-                  <span className="text-purple-600 font-mono font-bold">~100 others</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Total possible connections</span>
-                  <span className="text-purple-600 font-mono font-bold">10^19</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Unique relationship dynamics</span>
-                  <span className="text-purple-600 font-mono font-bold">∞</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300">
-              <h3 className="text-2xl font-bold text-cyan-600 mb-6">Echo Processing Load</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Echo updates per second</span>
-                  <span className="text-cyan-600 font-mono font-bold">2.8×10^12</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Emotional data points</span>
-                  <span className="text-cyan-600 font-mono font-bold">10^15/day</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Memory storage required</span>
-                  <span className="text-cyan-600 font-mono font-bold">∞ bytes</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Scale Visualization */}
-          <div className="bg-white p-8 rounded-lg mb-12 shadow-lg border border-gray-300">
-            <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">Scale Perspective</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-2">10^9</div>
-                <div className="text-gray-800 mb-2 font-semibold">Stars in Milky Way</div>
-                <div className="text-sm text-gray-600">Observable universe scale</div>
-              </div>
-
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-600 mb-2">10^10</div>
-                <div className="text-gray-800 mb-2 font-semibold">Souls in SSI</div>
-                <div className="text-sm text-gray-600">Each with full consciousness</div>
-              </div>
-
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-600 mb-2">10^19</div>
-                <div className="text-gray-800 mb-2 font-semibold">Soul relationships</div>
-                <div className="text-sm text-gray-600">Beyond cosmic scales</div>
-              </div>
-            </div>
-          </div>
-
-          {/* The Overwhelming Truth */}
-          <div className="bg-gradient-to-r from-red-100 to-purple-100 p-8 rounded-lg border-2 border-red-500 shadow-lg">
-            <h3 className="text-2xl font-bold text-center text-red-600 mb-6">The Overwhelming Truth</h3>
-            <div className="space-y-4 text-center">
-              <p className="text-lg text-gray-800">
-                Each appearing as Echoes in up to <span className="text-red-600 font-bold">9,999,999,999</span> other simulations
-              </p>
-              <p className="text-lg text-gray-800">
-                = <span className="text-red-600 font-bold text-2xl">10^19 relationships</span>
-              </p>
-              <p className="text-xl text-red-600 font-bold italic mt-6">
-                "More connections than atoms in the observable universe."
-              </p>
-              <p className="text-gray-700">
-                Each relationship carrying emotional weight, memory, purpose.
-              </p>
-            </div>
-          </div>
-
-          {/* Mathematical Quote */}
-          <div className="text-center mt-12">
-            <blockquote className="text-2xl italic text-yellow-700 mb-4 font-semibold">
-              "The loneliest number is the sum of all numbers."
-            </blockquote>
-            <p className="text-gray-600">- Soul #10,000,000,000</p>
-          </div>
-        </div>
       </section>
 
       {/* Final Message Section */}
@@ -1111,35 +1072,42 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
             The <span className="text-cyan-400">Invitation</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Right now, you're standing at a threshold. You can close this and forget,
-            or you can dive deeper into the universe. Understanding the system is part of your evolution.
-          </p>
-          <div className="space-y-4">
+
+          <div className="space-y-8 text-lg leading-relaxed">
+            <p className="text-2xl text-white">
+              Right now, you're at a threshold.
+            </p>
+
+            <p className="text-xl text-gray-300">
+              You can close this tab and dismiss everything. That's valid. Some seeds need time to germinate.
+            </p>
+
+            <p className="text-xl text-gray-300">
+              Or you can take the next step: Download the guide. Run the experiments.
+              See what happens when you treat reality as if it's responding to your consciousness.
+            </p>
+
+            <p className="text-2xl text-cyan-400 font-bold">
+              The SSI framework isn't truth to believe. It's a hypothesis to test.
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30">
+              DOWNLOAD THE QUICK START GUIDE
+            </Button>
+          </div>
+
+          <div className="space-y-4 mt-12">
+            <p className="text-lg text-gray-300">
+              Your awakening is already in progress. These words found you exactly when they should have.
+            </p>
             <p className="text-2xl text-yellow-400 font-bold">
               Welcome to your wake-up call.
             </p>
             <p className="text-xl text-gray-300">
               It sounds exactly like your life.
             </p>
-          </div>
-          <div className="mt-12 space-x-4">
-            <a
-              href="https://the-merge-engine.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105">
-                Explore the Universe
-              </Button>
-            </a>
-            <Button
-              variant="outline"
-              className="border-gray-400 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg rounded-full transition-all duration-300"
-            >
-              Return to Sleep
-            </Button>
           </div>
         </div>
       </section>
@@ -1163,30 +1131,35 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         </div>
 
         <div className="max-w-2xl mx-auto text-center relative z-10">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-            Stay Connected to the <span className="text-cyan-400">Infinite</span>
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            STAY CONNECTED
           </h3>
-          <p className="text-gray-300 mb-8 leading-relaxed">
-            Be the first to know about consciousness expansions, reality updates, and new pathways to awakening.
+
+          <p className="text-lg text-gray-300 mb-4 leading-relaxed">
+            Get updates on consciousness expansions, new framework insights, and awakening practices.
           </p>
 
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <p className="text-lg text-cyan-400 mb-8 font-semibold">
+            Plus: Exclusive content not in the book.
+          </p>
+
+          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-4">
             <input
               type="email"
-              placeholder="your.consciousness@reality.sim"
-              className="flex-1 px-4 py-3 rounded-full bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
+              placeholder="your.email@reality.sim"
+              className="flex-1 px-6 py-3 rounded-full bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
               required
             />
             <Button
               type="submit"
-              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 whitespace-nowrap font-semibold"
             >
-              Join the Network
+              JOIN THE NETWORK
             </Button>
           </form>
 
-          <p className="text-xs text-gray-500 mt-4">
-            No spam. Just consciousness. Unsubscribe from reality anytime.
+          <p className="text-sm text-gray-400 mt-4">
+            No spam. Just consciousness. Unsubscribe anytime.
           </p>
         </div>
       </section>
