@@ -404,24 +404,24 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">3-day reality experiments you can start TODAY</p>
+                  <p className="text-lg text-gray-200">3-day reality observation protocol you can start TODAY</p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Synchronicity test (this one blows minds)</p>
+                  <p className="text-lg text-gray-200">Synchronicity tracking method (this one reveals patterns)</p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Belief-physics correlation tracker</p>
+                  <p className="text-lg text-gray-200">Belief-physics correlation tracking</p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Echo recognition exercises</p>
+                  <p className="text-lg text-gray-200">Echo recognition and pattern analysis</p>
                 </div>
               </div>
 
               <p className="text-gray-300 mb-8 text-lg italic">
-                No theory. Just experiments. See what happens when you treat reality as responsive creation.
+                No theory. Just observation. See what happens when you explore reality as your personal simulation.
               </p>
 
               {/* Email input */}
@@ -1021,10 +1021,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-purple-400 text-2xl mr-4 mt-1">🧪</span>
+                  <span className="text-purple-400 text-2xl mr-4 mt-1">🔮</span>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">Advanced Experiments</h4>
-                    <p className="text-gray-400">30+ reality tests and consciousness exercises</p>
+                    <h4 className="text-white font-semibold text-lg">Advanced Explorations</h4>
+                    <p className="text-gray-400">30+ reality observations and consciousness investigations</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -1043,8 +1043,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   rel="noopener noreferrer"
                   className="inline-block"
                 >
-                  <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white px-10 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-purple-500/50 border-2 border-purple-400/30">
-                    GET THE FULL BOOK
+                  <Button className="relative bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-500 hover:from-cyan-400 hover:via-purple-400 hover:to-blue-400 text-white px-12 py-7 text-xl rounded-full transition-all duration-500 transform hover:scale-110 font-bold shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:shadow-[0_0_60px_rgba(139,92,246,0.6)] border-2 border-cyan-400/40 hover:border-purple-400/60 overflow-hidden group">
+                    <span className="relative z-10">GET THE FULL BOOK</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </Button>
                 </a>
                 <p className="text-sm text-gray-400 mt-4">
