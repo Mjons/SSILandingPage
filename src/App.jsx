@@ -990,7 +990,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 <img
                   src={ssiBookCover}
                   alt="The Solipsistic Simulation Incubator - 1st Edition"
-                  className="w-full h-auto rounded-xl shadow-2xl border-2 border-cyan-400/30"
+                  className="w-full h-auto rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
                   <span className="text-white text-xl font-bold">View Full Book →</span>
