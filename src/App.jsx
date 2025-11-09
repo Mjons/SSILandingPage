@@ -1023,8 +1023,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 <div className="flex items-start">
                   <span className="text-purple-400 text-2xl mr-4 mt-1">🔮</span>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">Advanced Explorations</h4>
-                    <p className="text-gray-400">30+ reality observations and consciousness investigations</p>
+                    <h4 className="text-white font-semibold text-lg">Pattern Recognition Methods</h4>
+                    <p className="text-gray-400">Track synchronicities and observe how your simulation responds to awareness</p>
                   </div>
                 </div>
                 <div className="flex items-start">
