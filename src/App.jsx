@@ -14,6 +14,7 @@ import portalInvitation from './assets/portal-invitation.png'
 // import ssiDiagram from './assets/SSI-Souls-Echoes-Diagram.png' // Replaced with inline SVG
 import soulPerspective from './assets/Soul-10B-Perspective.png'
 import personalJourney from './assets/SSI-Personal-Journey.png'
+import ssiBookCover from './assets/ssi-book-cover.png'
 
 // Main Content Component (extracted for infinite duplication)
 function MainContent({ loopId = '', scrollOffset = 0 }) {
@@ -948,6 +949,113 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         </div>
       </section>
 
+      {/* Book Showcase Section */}
+      <section className="py-24 px-6 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
+        {/* Subtle animated background */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-blue-400">
+              The Complete Framework
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Ready to dive deeper? Get the full philosophical framework, advanced experiments, and complete system architecture.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            {/* Book Cover */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+              <a
+                href="https://stan.store/UnrealApe/p/the-solipsistic-simulation-incubator-1st-edition"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block transform transition-transform duration-500 hover:scale-105"
+              >
+                <img
+                  src={ssiBookCover}
+                  alt="The Solipsistic Simulation Incubator - 1st Edition"
+                  className="w-full h-auto rounded-xl shadow-2xl border-2 border-cyan-400/30"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
+                  <span className="text-white text-xl font-bold">View Full Book →</span>
+                </div>
+              </a>
+            </div>
+
+            {/* Book Details */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  The Solipsistic Simulation Incubator
+                </h3>
+                <p className="text-xl text-cyan-400 font-semibold mb-6">1st Edition</p>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  The full exploration of consciousness, reality design, and the architecture of personal simulation.
+                  Goes beyond the Quick Start Guide with deep philosophical frameworks, advanced reality experiments,
+                  and the complete mathematical model of the Echo Network.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <span className="text-cyan-400 text-2xl mr-4 mt-1">📖</span>
+                  <div>
+                    <h4 className="text-white font-semibold text-lg">Complete Framework</h4>
+                    <p className="text-gray-400">Full philosophical architecture and system design</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-purple-400 text-2xl mr-4 mt-1">🧪</span>
+                  <div>
+                    <h4 className="text-white font-semibold text-lg">Advanced Experiments</h4>
+                    <p className="text-gray-400">30+ reality tests and consciousness exercises</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-blue-400 text-2xl mr-4 mt-1">🌐</span>
+                  <div>
+                    <h4 className="text-white font-semibold text-lg">Echo Network Theory</h4>
+                    <p className="text-gray-400">Deep dive into relationship dynamics and projection mechanics</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6">
+                <a
+                  href="https://stan.store/UnrealApe/p/the-solipsistic-simulation-incubator-1st-edition"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white px-10 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-purple-500/50 border-2 border-purple-400/30">
+                    GET THE FULL BOOK
+                  </Button>
+                </a>
+                <p className="text-sm text-gray-400 mt-4">
+                  Includes lifetime access and all future updates
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section
         className="py-20 px-6 relative overflow-hidden"
@@ -956,11 +1064,11 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             radial-gradient(ellipse at center top, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
             radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
             radial-gradient(ellipse at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-            linear-gradient(135deg, 
-              rgba(0, 0, 0, 0.95) 0%, 
-              rgba(15, 23, 42, 0.9) 25%, 
-              rgba(30, 41, 59, 0.85) 50%, 
-              rgba(15, 23, 42, 0.9) 75%, 
+            linear-gradient(135deg,
+              rgba(0, 0, 0, 0.95) 0%,
+              rgba(15, 23, 42, 0.9) 25%,
+              rgba(30, 41, 59, 0.85) 50%,
+              rgba(15, 23, 42, 0.9) 75%,
               rgba(0, 0, 0, 0.95) 100%
             )
           `
