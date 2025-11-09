@@ -433,12 +433,19 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 />
               </form>
 
-              <Button
-                type="button"
-                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-10 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+              <a
+                href="https://stan.store/UnrealApe/p/ssi-quick-start-guide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
               >
-                DOWNLOAD THE GUIDE + START THE 3-DAY TEST
-              </Button>
+                <Button
+                  type="button"
+                  className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-10 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+                >
+                  DOWNLOAD THE GUIDE + START THE 3-DAY TEST
+                </Button>
+              </a>
 
               <p className="text-sm text-gray-400 mt-6">
                 Over 1,000 souls downloaded this week. Reality started responding faster for 87% of them.
@@ -555,11 +562,18 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               </p>
 
               <div className="text-center mt-10">
-                <Button
-                  className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+                <a
+                  href="https://stan.store/UnrealApe/p/ssi-quick-start-guide"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
                 >
-                  GET THE QUICK GUIDE - IT'S FREE
-                </Button>
+                  <Button
+                    className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
+                  >
+                    GET THE QUICK GUIDE - IT'S FREE
+                  </Button>
+                </a>
               </div>
 
               <p className="text-lg text-gray-400 text-center italic mt-8">
@@ -1093,9 +1107,16 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           </div>
 
           <div className="mt-12">
-            <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30">
-              DOWNLOAD THE QUICK START GUIDE
-            </Button>
+            <a
+              href="https://stan.store/UnrealApe/p/ssi-quick-start-guide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30">
+                DOWNLOAD THE QUICK START GUIDE
+              </Button>
+            </a>
           </div>
 
           <div className="space-y-4 mt-12">
