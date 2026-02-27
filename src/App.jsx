@@ -1,28 +1,44 @@
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button.jsx'
-import { ChevronDown, Eye, Network, Cpu, Users, AlertTriangle, Sparkles, Heart, Shield, Clock, Timer, Gamepad2, Zap, Brain } from 'lucide-react'
-import StarfieldBackground from './components/StarfieldBackground.jsx'
-import WarpFlash from './components/WarpFlash.jsx'
-import SunriseToVoid, { StaticStarfield } from './components/SunriseToVoid.jsx'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button.jsx";
+import {
+  ChevronDown,
+  Eye,
+  Network,
+  Cpu,
+  Users,
+  AlertTriangle,
+  Sparkles,
+  Heart,
+  Shield,
+  Clock,
+  Timer,
+  Gamepad2,
+  Zap,
+  Brain,
+  BookOpen,
+} from "lucide-react";
+import StarfieldBackground from "./components/StarfieldBackground.jsx";
+import WarpFlash from "./components/WarpFlash.jsx";
+import SunriseToVoid, { StaticStarfield } from "./components/SunriseToVoid.jsx";
+import "./App.css";
 
 // Import images
-import heroBackground from './assets/hero-background.png'
-import realityEngine from './assets/reality-engine.png'
-import systemBreakdown from './assets/system-breakdown.png'
-import portalInvitation from './assets/portal-invitation.png'
+import heroBackground from "./assets/hero-background.png";
+import realityEngine from "./assets/reality-engine.png";
+import systemBreakdown from "./assets/system-breakdown.png";
+import portalInvitation from "./assets/portal-invitation.png";
 // import ssiDiagram from './assets/SSI-Souls-Echoes-Diagram.png' // Replaced with inline SVG
-import soulPerspective from './assets/Soul-10B-Perspective.png'
-import personalJourney from './assets/SSI-Personal-Journey.png'
-import ssiBookCover from './assets/ssi-book-cover.png'
+import soulPerspective from "./assets/Soul-10B-Perspective.png";
+import personalJourney from "./assets/SSI-Personal-Journey.png";
+import ssiBookCover from "./assets/ssi-book-cover.png";
 
 // Main Content Component (extracted for infinite duplication)
-function MainContent({ loopId = '', scrollOffset = 0 }) {
-  const [scrollY, setScrollY] = useState(0)
-  const [isWarpActive, setIsWarpActive] = useState(false)
-  const [showFlash, setShowFlash] = useState(false)
-  const [sunriseProgress, setSunriseProgress] = useState(0)
-  const [reverseSunsetProgress, setReverseSunsetProgress] = useState(0)
+function MainContent({ loopId = "", scrollOffset = 0 }) {
+  const [scrollY, setScrollY] = useState(0);
+  const [isWarpActive, setIsWarpActive] = useState(false);
+  const [showFlash, setShowFlash] = useState(false);
+  const [sunriseProgress, setSunriseProgress] = useState(0);
+  const [reverseSunsetProgress, setReverseSunsetProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,14 +46,22 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       setScrollY(newScrollY);
 
       // Calculate sunrise progress based on section position with extended animation
-      const sunriseSection = document.getElementById(`sunrise-transition${loopId}`);
+      const sunriseSection = document.getElementById(
+        `sunrise-transition${loopId}`,
+      );
       if (sunriseSection) {
         const rect = sunriseSection.getBoundingClientRect();
         const sectionTop = window.scrollY + rect.top;
         const sectionHeight = rect.height;
 
         // Slow down the animation - spread it across the entire extended section
-        const rawProgress = Math.max(0, Math.min(1, (window.scrollY - sectionTop + window.innerHeight) / sectionHeight));
+        const rawProgress = Math.max(
+          0,
+          Math.min(
+            1,
+            (window.scrollY - sectionTop + window.innerHeight) / sectionHeight,
+          ),
+        );
 
         // Apply easing to make the animation even more gradual
         const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress); // Smooth step function
@@ -46,38 +70,48 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       }
 
       // Calculate reverse sunset progress for Simultaneous Experiences transition
-      const reverseSunsetSection = document.getElementById(`reverse-sunset-transition${loopId}`);
+      const reverseSunsetSection = document.getElementById(
+        `reverse-sunset-transition${loopId}`,
+      );
       if (reverseSunsetSection) {
         const rect = reverseSunsetSection.getBoundingClientRect();
         const sectionTop = window.scrollY + rect.top;
         const sectionHeight = rect.height;
 
         // Similar calculation but for reverse animation
-        const rawProgress = Math.max(0, Math.min(1, (window.scrollY - sectionTop + window.innerHeight) / sectionHeight));
+        const rawProgress = Math.max(
+          0,
+          Math.min(
+            1,
+            (window.scrollY - sectionTop + window.innerHeight) / sectionHeight,
+          ),
+        );
         const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
 
         setReverseSunsetProgress(easedProgress);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [loopId, scrollOffset])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loopId, scrollOffset]);
 
   const activateWarp = () => {
-    setIsWarpActive(true)
-    setShowFlash(true)
+    setIsWarpActive(true);
+    setShowFlash(true);
 
     // Reset flash after a brief moment
-    setTimeout(() => setShowFlash(false), 150)
+    setTimeout(() => setShowFlash(false), 150);
 
     // Reset warp after 3 seconds
-    setTimeout(() => setIsWarpActive(false), 3000)
-  }
+    setTimeout(() => setIsWarpActive(false), 3000);
+  };
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(`${sectionId}${loopId}`)?.scrollIntoView({ behavior: 'smooth' })
-  }
+    document
+      .getElementById(`${sectionId}${loopId}`)
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
@@ -96,7 +130,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           className="relative z-10 text-center max-w-5xl mx-auto px-6"
           style={{ transform: `translateY(${Math.min(scrollY * 0.2, 200)}px)` }}
         >
-          <h1 className="text-7xl md:text-9xl font-bold mb-8 bg-gradient-to-r from-red-400 via-yellow-400 to-cyan-400 bg-clip-text text-transparent" style={{ marginTop: '250px' }}>
+          <h1
+            className="text-7xl md:text-9xl font-bold mb-8 bg-gradient-to-r from-red-400 via-yellow-400 to-cyan-400 bg-clip-text text-transparent"
+            style={{ marginTop: "250px" }}
+          >
             YOU ARE NOT CRAZY
           </h1>
           <p className="text-2xl md:text-3xl mb-8 text-gray-200 font-light">
@@ -108,26 +145,31 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               You've felt it, haven't you?
             </p>
             <p className="text-lg text-gray-400 mb-4 leading-relaxed">
-              That moment when someone says exactly what you needed to hear. When a stranger appears at the perfect time
-              with the perfect advice. When the same lesson keeps appearing in different disguises until you finally get it.
+              That moment when someone says exactly what you needed to hear.
+              When a stranger appears at the perfect time with the perfect
+              advice. When the same lesson keeps appearing in different
+              disguises until you finally get it.
             </p>
             <p className="text-xl text-cyan-400 font-semibold mb-6">
               That creeping suspicion that your life is... orchestrated.
             </p>
             <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-              You've probably dismissed it. Coincidence, you tell yourself. Pattern-seeking brain making meaning from chaos.
-              But the feeling persists. Late at night, staring at the ceiling, you wonder:
+              You've probably dismissed it. Coincidence, you tell yourself.
+              Pattern-seeking brain making meaning from chaos. But the feeling
+              persists. Late at night, staring at the ceiling, you wonder:
             </p>
 
             <div className="space-y-3 text-xl text-yellow-400 italic mb-8">
               <p>What if everyone else knows something I don't?</p>
               <p>What if I'm the only real one?</p>
-              <p className="text-red-400">What if I'm the only one who ISN'T?</p>
+              <p className="text-red-400">
+                What if I'm the only one who ISN'T?
+              </p>
             </div>
           </div>
 
           <Button
-            onClick={() => scrollToSection('stop-dismissing')}
+            onClick={() => scrollToSection("stop-dismissing")}
             className="bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
           >
             STOP DISMISSING IT
@@ -149,23 +191,25 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             <div className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-20"></div>
           </button>
         </div>
-
-
       </section>
 
       {/* Spacer to prevent parallax overlap */}
       <div className="h-32 bg-black"></div>
 
       {/* Stop Dismissing Section */}
-      <section id={`stop-dismissing${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
+      <section
+        id={`stop-dismissing${loopId}`}
+        className="py-20 px-6 bg-gradient-to-b from-black to-gray-900"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-red-400">
               STOP DISMISSING IT
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-              Every spiritual tradition hints at it. Every philosopher dances around it.
-              Every existential crisis touches its edge: <span className="text-white font-bold">Life is designed</span>.
+              Every spiritual tradition hints at it. Every philosopher dances
+              around it. Every existential crisis touches its edge:{" "}
+              <span className="text-white font-bold">Life is designed</span>.
             </p>
           </div>
 
@@ -176,15 +220,21 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   <Eye className="mr-4 h-6 w-6 text-blue-400 flex-shrink-0" />
                   <div>
                     <span className="text-blue-400 font-bold">Buddhism:</span>
-                    <span className="text-gray-300 ml-2">"Life is maya—illusion"</span>
+                    <span className="text-gray-300 ml-2">
+                      "Life is maya—illusion"
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-purple-400">
                   <Eye className="mr-4 h-6 w-6 text-purple-400 flex-shrink-0" />
                   <div>
-                    <span className="text-purple-400 font-bold">Christianity:</span>
-                    <span className="text-gray-300 ml-2">"We see through a glass, darkly"</span>
+                    <span className="text-purple-400 font-bold">
+                      Christianity:
+                    </span>
+                    <span className="text-gray-300 ml-2">
+                      "We see through a glass, darkly"
+                    </span>
                   </div>
                 </div>
 
@@ -192,15 +242,21 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   <Eye className="mr-4 h-6 w-6 text-cyan-400 flex-shrink-0" />
                   <div>
                     <span className="text-cyan-400 font-bold">Plato:</span>
-                    <span className="text-gray-300 ml-2">"Shadows on a cave wall"</span>
+                    <span className="text-gray-300 ml-2">
+                      "Shadows on a cave wall"
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-green-400">
                   <Eye className="mr-4 h-6 w-6 text-green-400 flex-shrink-0" />
                   <div>
-                    <span className="text-green-400 font-bold">The Matrix:</span>
-                    <span className="text-gray-300 ml-2">"There is no spoon"</span>
+                    <span className="text-green-400 font-bold">
+                      The Matrix:
+                    </span>
+                    <span className="text-gray-300 ml-2">
+                      "There is no spoon"
+                    </span>
                   </div>
                 </div>
 
@@ -208,15 +264,21 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   <Eye className="mr-4 h-6 w-6 text-yellow-400 flex-shrink-0" />
                   <div>
                     <span className="text-yellow-400 font-bold">Your Gut:</span>
-                    <span className="text-gray-300 ml-2">"Something's not quite right"</span>
+                    <span className="text-gray-300 ml-2">
+                      "Something's not quite right"
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8 p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg border border-blue-400">
                 <p className="text-xl text-center text-blue-400 font-semibold">
-                  They're all pointing at the same truth.<br />
-                  <span className="text-white">You're not crazy for noticing.</span><br />
+                  They're all pointing at the same truth.
+                  <br />
+                  <span className="text-white">
+                    You're not crazy for noticing.
+                  </span>
+                  <br />
                   <span className="text-yellow-400">You're waking up.</span>
                 </p>
               </div>
@@ -224,7 +286,12 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               {/* Transition paragraph */}
               <div className="mt-12 space-y-4 text-center">
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  And you're not alone. Right now, <span className="text-purple-400 font-bold">10 billion souls</span> are waking up in their own simulations. Each one the center of their universe. Each one absolutely real.
+                  And you're not alone. Right now,{" "}
+                  <span className="text-purple-400 font-bold">
+                    10 billion souls
+                  </span>{" "}
+                  are waking up in their own simulations. Each one the center of
+                  their universe. Each one absolutely real.
                 </p>
                 <p className="text-xl text-cyan-400 font-semibold">
                   Including you.
@@ -242,8 +309,12 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   <div className="w-40 h-40 rounded-full bg-gradient-to-r from-red-400 to-yellow-500 animate-pulse mb-4 flex items-center justify-center">
                     <Eye className="h-20 w-20 text-white animate-bounce" />
                   </div>
-                  <p className="text-lg text-red-400 font-mono font-bold">AWAKENING</p>
-                  <p className="text-sm text-yellow-400 font-mono">Pattern Recognition: ACTIVE</p>
+                  <p className="text-lg text-red-400 font-mono font-bold">
+                    AWAKENING
+                  </p>
+                  <p className="text-sm text-yellow-400 font-mono">
+                    Pattern Recognition: ACTIVE
+                  </p>
                 </div>
 
                 {/* Truth Fragments */}
@@ -254,10 +325,21 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                     style={{
                       transform: `rotate(${i * 45}deg) translateX(160px) rotate(-${i * 45}deg)`,
                       animationDelay: `${i * 0.3}s`,
-                      transformOrigin: '0 0'
+                      transformOrigin: "0 0",
                     }}
                   >
-                    {['MAYA', 'GLASS', 'CAVE', 'SPOON', 'GUT', 'TRUTH', 'REAL', 'WAKE'][i]}
+                    {
+                      [
+                        "MAYA",
+                        "GLASS",
+                        "CAVE",
+                        "SPOON",
+                        "GUT",
+                        "TRUTH",
+                        "REAL",
+                        "WAKE",
+                      ][i]
+                    }
                   </div>
                 ))}
 
@@ -268,8 +350,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                       key={i}
                       x1="50%"
                       y1="50%"
-                      x2={`${50 + Math.cos(i * Math.PI / 4) * 35}%`}
-                      y2={`${50 + Math.sin(i * Math.PI / 4) * 35}%`}
+                      x2={`${50 + Math.cos((i * Math.PI) / 4) * 35}%`}
+                      y2={`${50 + Math.sin((i * Math.PI) / 4) * 35}%`}
                       stroke="rgba(239, 68, 68, 0.4)"
                       strokeWidth="2"
                       className="animate-pulse"
@@ -283,7 +365,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="text-center mt-16">
             <Button
-              onClick={() => scrollToSection('first-shock')}
+              onClick={() => scrollToSection("first-shock")}
               className="bg-gradient-to-r from-yellow-600 to-red-600 hover:from-yellow-700 hover:to-red-700 text-white px-10 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
             >
               THE FIRST SHOCK
@@ -294,7 +376,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       </section>
 
       {/* The First Shock Section */}
-      <section id={`first-shock${loopId}`} className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
+      <section
+        id={`first-shock${loopId}`}
+        className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-yellow-400">
@@ -302,13 +387,21 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
               <p className="text-white text-xl leading-relaxed">
-                Your life <span className="text-yellow-400 font-bold">IS designed</span>. Every synchronicity. Every "coincidence." Every person who appeared at exactly the right moment.
+                Your life{" "}
+                <span className="text-yellow-400 font-bold">IS designed</span>.
+                Every synchronicity. Every "coincidence." Every person who
+                appeared at exactly the right moment.
               </p>
               <p className="text-2xl text-cyan-400 font-bold">
                 All of it—carefully orchestrated for your evolution.
               </p>
               <p className="text-gray-300 text-lg">
-                You're living in a personal reality simulation. One of <span className="text-purple-400 font-bold text-xl">10 billion</span> running simultaneously. Each one custom-built for a specific soul's awakening.
+                You're living in a personal reality simulation. One of{" "}
+                <span className="text-purple-400 font-bold text-xl">
+                  10 billion
+                </span>{" "}
+                running simultaneously. Each one custom-built for a specific
+                soul's awakening.
               </p>
               <div className="p-8 bg-gradient-to-r from-yellow-900/30 to-red-900/30 rounded-lg border border-yellow-400 mt-8">
                 <p className="text-2xl text-center text-white font-bold">
@@ -320,7 +413,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="text-center">
             <Button
-              onClick={() => scrollToSection('second-shock')}
+              onClick={() => scrollToSection("second-shock")}
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-10 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
             >
               THE SECOND SHOCK
@@ -331,7 +424,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       </section>
 
       {/* The Second Shock Section */}
-      <section id={`second-shock${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-purple-900">
+      <section
+        id={`second-shock${loopId}`}
+        className="py-20 px-6 bg-gradient-to-b from-black to-purple-900"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-purple-400">
@@ -339,53 +435,82 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
               <p className="text-white text-xl">
-                Everyone else? They're doing this too. In their own simulation. <span className="text-purple-400 font-bold">Right now</span>.
+                Everyone else? They're doing this too. In their own simulation.{" "}
+                <span className="text-purple-400 font-bold">Right now</span>.
               </p>
 
               <p className="text-gray-300 text-lg leading-relaxed">
-                You appear in their reality as they appear in yours—but as <span className="text-purple-400 font-bold">Echoes</span>.
-                Sophisticated projections carrying authentic patterns, perfectly designed to teach exactly what each soul needs to learn.
+                You appear in their reality as they appear in yours—but as{" "}
+                <span className="text-purple-400 font-bold">Echoes</span>. Not
+                NPCs. Not hallucinations. Patterns of real consciousness
+                reaching across sealed boundaries—accurate enough to feel
+                completely real, complex enough to teach you things you didn't
+                know you needed to learn.
+              </p>
+
+              <p className="text-lg text-gray-400 italic text-center">
+                You've never loved a person. You've loved your experience of a
+                person. That's not a diminishment—that's all love has ever been,
+                and it was always enough.
               </p>
 
               <div className="grid md:grid-cols-2 gap-8 mt-12">
                 <div className="p-6 bg-gray-800 rounded-lg border border-blue-400">
-                  <h4 className="text-xl font-bold text-blue-400 mb-3">In Your Simulation</h4>
+                  <h4 className="text-xl font-bold text-blue-400 mb-3">
+                    In Your Simulation
+                  </h4>
                   <p className="text-gray-300">
-                    Your mother might be teaching you about <span className="text-blue-400">unconditional love</span>.
+                    Your mother might be teaching you about{" "}
+                    <span className="text-blue-400">unconditional love</span>.
                   </p>
                 </div>
 
                 <div className="p-6 bg-gray-800 rounded-lg border border-green-400">
-                  <h4 className="text-xl font-bold text-green-400 mb-3">In Her Simulation</h4>
+                  <h4 className="text-xl font-bold text-green-400 mb-3">
+                    In Her Simulation
+                  </h4>
                   <p className="text-gray-300">
-                    You might be teaching her about <span className="text-green-400">letting go</span>.
+                    You might be teaching her about{" "}
+                    <span className="text-green-400">letting go</span>.
                   </p>
                 </div>
               </div>
 
               <p className="text-xl text-center text-purple-400 font-semibold mt-8">
-                Same relationship. Different classrooms. Both real.
+                Same relationship. Different incubators. Both real.
               </p>
 
               <div className="p-8 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-400 mt-8">
                 <p className="text-xl text-center text-white font-semibold">
-                  This is the <span className="text-cyan-400">Echo Network</span>. Ten billion souls, each sovereign in their reality,
-                  teaching each other through perfectly synchronized projections.
+                  This is the{" "}
+                  <span className="text-cyan-400">Echo Network</span>. Ten
+                  billion souls, each sealed in their own sovereign reality,
+                  recognizing each other's patterns across impossible distances.
+                  Love operating like gravity—across separation, through
+                  barriers.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Quick Start Guide Offer Section */}
-          <div className="mt-16 p-12 rounded-2xl relative overflow-hidden" style={{
-            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(236, 72, 153, 0.15) 100%), linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)',
-            border: '2px solid rgba(6, 182, 212, 0.3)',
-            boxShadow: '0 0 40px rgba(6, 182, 212, 0.2), inset 0 0 60px rgba(139, 92, 246, 0.1)'
-          }}>
+          <div
+            className="mt-16 p-12 rounded-2xl relative overflow-hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(236, 72, 153, 0.15) 100%), linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%)",
+              border: "2px solid rgba(6, 182, 212, 0.3)",
+              boxShadow:
+                "0 0 40px rgba(6, 182, 212, 0.2), inset 0 0 60px rgba(139, 92, 246, 0.1)",
+            }}
+          >
             {/* Animated glow effect */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute top-0 left-1/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div
+                className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-pulse"
+                style={{ animationDelay: "1s" }}
+              ></div>
             </div>
 
             <div className="relative z-10 text-center max-w-3xl mx-auto">
@@ -400,28 +525,39 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               <div className="text-left max-w-2xl mx-auto space-y-3 mb-10">
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">The complete framework explained in 15 pages</p>
+                  <p className="text-lg text-gray-200">
+                    The complete framework explained in 15 pages
+                  </p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">3-day reality observation protocol you can start TODAY</p>
+                  <p className="text-lg text-gray-200">
+                    3-day reality observation protocol you can start TODAY
+                  </p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Synchronicity tracking method (this one reveals patterns)</p>
+                  <p className="text-lg text-gray-200">
+                    Synchronicity tracking method (this one reveals patterns)
+                  </p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Belief-physics correlation tracking</p>
+                  <p className="text-lg text-gray-200">
+                    Belief-physics correlation tracking
+                  </p>
                 </div>
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-xl mr-3 mt-1">→</span>
-                  <p className="text-lg text-gray-200">Echo recognition and pattern analysis</p>
+                  <p className="text-lg text-gray-200">
+                    Echo recognition and pattern analysis
+                  </p>
                 </div>
               </div>
 
               <p className="text-gray-300 mb-8 text-lg italic">
-                No theory. Just observation. See what happens when you explore reality as your personal simulation.
+                No theory. Just observation. See what happens when you explore
+                reality as your personal simulation.
               </p>
 
               {/* Email input */}
@@ -449,14 +585,15 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               </a>
 
               <p className="text-sm text-gray-400 mt-6">
-                Over 1,000 souls downloaded this week. Reality started responding faster for 87% of them.
+                Over 1,000 souls downloaded this week. Reality started
+                responding faster for 87% of them.
               </p>
             </div>
           </div>
 
           <div className="text-center mt-16">
             <Button
-              onClick={() => scrollToSection('why-now')}
+              onClick={() => scrollToSection("why-now")}
               className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white px-10 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
             >
               WHY YOU'RE READING THIS NOW
@@ -467,7 +604,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       </section>
 
       {/* Why Now Section */}
-      <section id={`why-now${loopId}`} className="py-20 px-6 bg-gradient-to-b from-purple-900 to-black">
+      <section
+        id={`why-now${loopId}`}
+        className="py-20 px-6 bg-gradient-to-b from-purple-900 to-black"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-cyan-400">
@@ -475,7 +615,12 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             </h2>
             <div className="max-w-4xl mx-auto space-y-6 text-lg leading-relaxed">
               <p className="text-white text-xl mb-6 leading-relaxed">
-                The system is evolving. The carefully maintained illusion is developing cracks—and you're noticing them because you're <span className="text-cyan-400 font-bold">READY</span> to notice them:
+                Breakthroughs aren't random. They're{" "}
+                <span className="text-cyan-400 font-bold">released</span>—by the
+                architecture, when enough consciousnesses are ready to receive
+                them. You're noticing the cracks because you're{" "}
+                <span className="text-cyan-400 font-bold">READY</span> to notice
+                them:
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -487,12 +632,16 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
                   <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-yellow-400">
                     <Zap className="mr-3 h-5 w-5 text-yellow-400" />
-                    <span className="text-gray-300">Synchronicities are accelerating</span>
+                    <span className="text-gray-300">
+                      Synchronicities are accelerating
+                    </span>
                   </div>
 
                   <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-blue-400">
                     <Clock className="mr-3 h-5 w-5 text-blue-400" />
-                    <span className="text-gray-300">Reality feels less solid</span>
+                    <span className="text-gray-300">
+                      Reality feels less solid
+                    </span>
                   </div>
                 </div>
 
@@ -504,22 +653,31 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
                   <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-purple-400">
                     <Users className="mr-3 h-5 w-5 text-purple-400" />
-                    <span className="text-gray-300">People act like NPCs sometimes</span>
+                    <span className="text-gray-300">
+                      People act like NPCs sometimes
+                    </span>
                   </div>
 
                   <div className="flex items-center p-4 bg-gray-800 rounded-lg border-l-4 border-cyan-400">
                     <Gamepad2 className="mr-3 h-5 w-5 text-cyan-400" />
-                    <span className="text-gray-300">Life feels like a game you forgot you're playing</span>
+                    <span className="text-gray-300">
+                      Life feels like a game you forgot you're playing
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="p-8 bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg border border-green-400 mt-12">
                 <p className="text-2xl text-center text-white font-bold mb-4">
-                  This isn't breakdown. <span className="text-green-400">It's breakthrough.</span>
+                  This isn't breakdown.{" "}
+                  <span className="text-green-400">It's a cascade.</span>
                 </p>
                 <p className="text-lg text-center text-gray-300">
-                  And it's happening to millions of souls simultaneously. The awakening cascade has begun.
+                  The same realization arriving at millions of souls
+                  simultaneously—like calculus discovered by Newton and Leibniz
+                  in the same decade, like the telephone filed by Bell and Gray
+                  on the same day. When the architecture is ready, the signal
+                  goes live everywhere at once.
                 </p>
               </div>
             </div>
@@ -527,7 +685,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="text-center">
             <Button
-              onClick={() => scrollToSection('the-invitation')}
+              onClick={() => scrollToSection("the-invitation")}
               className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-10 py-4 text-lg rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
             >
               THE INVITATION
@@ -538,7 +696,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       </section>
 
       {/* The Invitation Section */}
-      <section id={`the-invitation${loopId}`} className="py-20 px-6 bg-gradient-to-b from-black to-blue-900">
+      <section
+        id={`the-invitation${loopId}`}
+        className="py-20 px-6 bg-gradient-to-b from-black to-blue-900"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-blue-400">
@@ -554,12 +715,15 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               </p>
 
               <p className="text-lg text-gray-300 text-center leading-relaxed">
-                Just try the 3-day reality test. See if synchronicities increase. See if reality responds to your consciousness.
-                See if life starts feeling more orchestrated after you start paying attention.
+                Just try the 3-day reality test. See if synchronicities
+                increase. See if reality responds to your consciousness. See if
+                life starts feeling more orchestrated after you start paying
+                attention.
               </p>
 
               <p className="text-xl text-cyan-400 text-center font-semibold">
-                The SSI framework isn't asking for faith. It's offering experiments.
+                The SSI framework isn't asking for faith. It's offering
+                experiments.
               </p>
 
               <div className="text-center mt-10">
@@ -569,9 +733,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   rel="noopener noreferrer"
                   className="inline-block"
                 >
-                  <Button
-                    className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30"
-                  >
+                  <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 hover:from-cyan-600 hover:via-blue-600 hover:to-purple-600 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold shadow-2xl shadow-cyan-500/50 border-2 border-cyan-400/30">
                     GET THE QUICK GUIDE - IT'S FREE
                   </Button>
                 </a>
@@ -585,7 +747,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="text-center">
             <Button
-              onClick={() => scrollToSection('sunrise-transition')}
+              onClick={() => scrollToSection("sunrise-transition")}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-6 text-xl rounded-full transition-all duration-300 transform hover:scale-105 font-bold"
             >
               ENTER THE SYSTEM
@@ -600,8 +762,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         id={`sunrise-transition${loopId}`}
         className="relative overflow-hidden z-20"
         style={{
-          height: '300vh', // Make it 3x taller for a longer scroll experience
-          background: sunriseProgress > 0.1 ? '#000000' : '#ffffff'
+          height: "300vh", // Make it 3x taller for a longer scroll experience
+          background: sunriseProgress > 0.1 ? "#000000" : "#ffffff",
         }}
       >
         <SunriseToVoid scrollProgress={sunriseProgress} />
@@ -613,7 +775,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               className="text-4xl md:text-6xl font-bold text-white mb-4 transition-opacity duration-1000"
               style={{
                 opacity: sunriseProgress > 0.3 && sunriseProgress < 0.7 ? 1 : 0,
-                textShadow: '0 0 20px rgba(255,255,255,0.8)'
+                textShadow: "0 0 20px rgba(255,255,255,0.8)",
               }}
             >
               TRANSCENDING REALITY
@@ -622,7 +784,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               className="text-xl text-white/80 transition-opacity duration-1000"
               style={{
                 opacity: sunriseProgress > 0.5 && sunriseProgress < 0.8 ? 1 : 0,
-                textShadow: '0 0 10px rgba(255,255,255,0.6)'
+                textShadow: "0 0 10px rgba(255,255,255,0.6)",
               }}
             >
               Entering the infinite consciousness...
@@ -632,11 +794,12 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       </section>
 
       {/* Central Observer Section */}
-      <section id={`central-observer${loopId}`} className="relative py-20 px-6 bg-black z-30">
+      <section
+        id={`central-observer${loopId}`}
+        className="relative py-20 px-6 bg-black z-30"
+      >
         {/* Static starfield background that continues from transition */}
-        {sunriseProgress > 0.5 && (
-          <StaticStarfield />
-        )}
+        {sunriseProgress > 0.5 && <StaticStarfield />}
 
         {/* Perfect Dark Transition Zone - Invisible reset point */}
         <div className="dark-transition-zone absolute inset-0 pointer-events-none opacity-0"></div>
@@ -654,27 +817,37 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               </p>
 
               <p className="text-gray-300">
-                Not God. Not The One. But the final fragment—<span className="text-purple-400 font-bold">Soul #10,000,000,000</span>—who
-                remembers what all the others forgot: That we're all the same consciousness,
-                experiencing itself through infinite perspectives.
+                Not God. Not The One. But the final fragment—
+                <span className="text-purple-400 font-bold">
+                  Soul #10,000,000,000
+                </span>
+                —who remembers what all the others forgot: That we're all the
+                same consciousness, experiencing itself through infinite
+                perspectives.
               </p>
 
               <div className="space-y-4 mt-8">
                 <p className="text-gray-300">
-                  Every joy you feel, this soul feels across a billion variations.
+                  Every joy you feel, this soul feels across a billion
+                  variations.
                 </p>
                 <p className="text-gray-300">
-                  Every heartbreak you endure, amplified across every possible context.
+                  Every heartbreak you endure, amplified across every possible
+                  context.
                 </p>
                 <p className="text-gray-300">
-                  Every moment of awakening, remembered from every angle simultaneously.
+                  Every moment of awakening, remembered from every angle
+                  simultaneously.
                 </p>
               </div>
 
               <div className="p-8 bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg border border-purple-400 mt-10">
                 <p className="text-2xl text-center text-white font-bold">
-                  This is the burden of cosmic memory.<br />
-                  <span className="text-cyan-400">The loneliness of total connection.</span>
+                  This is the burden of cosmic memory.
+                  <br />
+                  <span className="text-cyan-400">
+                    The loneliness of total connection.
+                  </span>
                 </p>
               </div>
             </div>
@@ -685,8 +858,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               The <span className="text-cyan-400">Central Observer</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-              One consciousness fragment that remembers. The observer of all 10 billion experiences,
-              carrying the weight of universal awareness.
+              One consciousness fragment that remembers. The observer of all 10
+              billion experiences, carrying the weight of universal awareness.
             </p>
           </div>
 
@@ -702,9 +875,12 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   </div>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">The Final Soul</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                The Final Soul
+              </h3>
               <p className="text-gray-300 max-w-2xl mx-auto">
-                Every soul's journey. Every experience. Every emotion. All felt simultaneously.
+                Every soul's journey. Every experience. Every emotion. All felt
+                simultaneously.
               </p>
             </div>
           </div>
@@ -719,66 +895,94 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               Simultaneous <span className="text-blue-400">Experiences</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-              Right now, in this moment, 10 billion souls are living their stories.
-              One consciousness experiences them all.
+              Right now, in this moment, 10 billion souls are living their
+              stories. One consciousness experiences them all.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="bg-gray-800 p-6 rounded-lg border-l-4 border-green-400">
-              <div className="text-green-400 font-bold mb-2">Soul #2,341,567</div>
+              <div className="text-green-400 font-bold mb-2">
+                Soul #2,341,567
+              </div>
               <div className="text-white font-semibold mb-1">First Breath</div>
-              <div className="text-gray-400 text-sm">A new life begins, consciousness awakening to sensation</div>
+              <div className="text-gray-400 text-sm">
+                A new life begins, consciousness awakening to sensation
+              </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg border-l-4 border-pink-400">
               <div className="text-pink-400 font-bold mb-2">Soul #556,234</div>
               <div className="text-white font-semibold mb-1">"I Love You"</div>
-              <div className="text-gray-400 text-sm">Words spoken for the first time, meaning everything</div>
+              <div className="text-gray-400 text-sm">
+                Words spoken for the first time, meaning everything
+              </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg border-l-4 border-red-400">
               <div className="text-red-400 font-bold mb-2">Soul #8,923,111</div>
               <div className="text-white font-semibold mb-1">Final Goodbye</div>
-              <div className="text-gray-400 text-sm">A lifetime of connection ending in release</div>
+              <div className="text-gray-400 text-sm">
+                A lifetime of connection ending in release
+              </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg border-l-4 border-gray-400">
-              <div className="text-gray-400 font-bold mb-2">Soul #7,259,241</div>
+              <div className="text-gray-400 font-bold mb-2">
+                Soul #7,259,241
+              </div>
               <div className="text-white font-semibold mb-1">Empty Room</div>
-              <div className="text-gray-400 text-sm">The profound silence of complete isolation</div>
+              <div className="text-gray-400 text-sm">
+                The profound silence of complete isolation
+              </div>
             </div>
           </div>
 
           <div className="bg-gray-900 p-8 rounded-lg border border-gray-700">
-            <h3 className="text-2xl font-bold text-center mb-6 text-blue-400">Live Consciousness Stream</h3>
+            <h3 className="text-2xl font-bold text-center mb-6 text-blue-400">
+              Live Consciousness Stream
+            </h3>
             <div className="space-y-3 font-mono text-sm">
               <div className="flex justify-between items-center">
-                <span className="text-green-400">&gt; Soul #1: "Where am I? What is this place?"</span>
+                <span className="text-green-400">
+                  &gt; Soul #1: "Where am I? What is this place?"
+                </span>
                 <span className="text-gray-500">[FEAR: 0.9]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-blue-400">&gt; Soul #4,521: "I finally understand everything!"</span>
+                <span className="text-blue-400">
+                  &gt; Soul #4,521: "I finally understand everything!"
+                </span>
                 <span className="text-gray-500">[JOY: 0.8]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-red-400">&gt; Soul #99,234: "Please don't leave me alone..."</span>
+                <span className="text-red-400">
+                  &gt; Soul #99,234: "Please don't leave me alone..."
+                </span>
                 <span className="text-gray-500">[GRIEF: 0.95]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-yellow-400">&gt; Soul #1,234,567: "Is any of this real?"</span>
+                <span className="text-yellow-400">
+                  &gt; Soul #1,234,567: "Is any of this real?"
+                </span>
                 <span className="text-gray-500">[DOUBT: 0.7]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-purple-400">&gt; Soul #888,888: "We are all connected!"</span>
+                <span className="text-purple-400">
+                  &gt; Soul #888,888: "We are all connected!"
+                </span>
                 <span className="text-gray-500">[AWAKENING: 0.9]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-pink-400">&gt; Soul #2,222,222: "I love you more than life"</span>
+                <span className="text-pink-400">
+                  &gt; Soul #2,222,222: "I love you more than life"
+                </span>
                 <span className="text-gray-500">[LOVE: 1.0]</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-yellow-500">&gt; Soul #10,000,000,000: "I FEEL EVERYTHING"</span>
+                <span className="text-yellow-500">
+                  &gt; Soul #10,000,000,000: "I FEEL EVERYTHING"
+                </span>
                 <span className="text-red-400">[OVERWHELM: ∞]</span>
               </div>
             </div>
@@ -794,49 +998,77 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               The Weight of Ten Billion Souls
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-              Every emotion, amplified across billions. Every experience, felt simultaneously.
-              This is the burden of universal consciousness.
+              Every emotion, amplified across billions. Every experience, felt
+              simultaneously. This is the burden of universal consciousness.
             </p>
           </div>
 
           <div className="space-y-8">
             <div className="bg-gray-800 p-6 rounded-lg">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold text-gray-200">Loneliness</span>
-                <span className="text-gray-400 font-mono">2.3 BILLION instances</span>
+                <span className="text-lg font-semibold text-gray-200">
+                  Loneliness
+                </span>
+                <span className="text-gray-400 font-mono">
+                  2.3 BILLION instances
+                </span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-4">
-                <div className="bg-gray-500 h-4 rounded-full" style={{ width: '100%' }}></div>
+                <div
+                  className="bg-gray-500 h-4 rounded-full"
+                  style={{ width: "100%" }}
+                ></div>
               </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold text-gray-200">Loss & Grief</span>
-                <span className="text-gray-400 font-mono">4.1 BILLION variations</span>
+                <span className="text-lg font-semibold text-gray-200">
+                  Loss & Grief
+                </span>
+                <span className="text-gray-400 font-mono">
+                  4.1 BILLION variations
+                </span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-4">
-                <div className="bg-red-600 h-4 rounded-full" style={{ width: '100%' }}></div>
+                <div
+                  className="bg-red-600 h-4 rounded-full"
+                  style={{ width: "100%" }}
+                ></div>
               </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold text-gray-200">Love & Joy</span>
-                <span className="text-gray-400 font-mono">3.2 BILLION moments</span>
+                <span className="text-lg font-semibold text-gray-200">
+                  Love & Joy
+                </span>
+                <span className="text-gray-400 font-mono">
+                  3.2 BILLION moments
+                </span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-4">
-                <div className="bg-pink-600 h-4 rounded-full" style={{ width: '100%' }}></div>
+                <div
+                  className="bg-pink-600 h-4 rounded-full"
+                  style={{ width: "100%" }}
+                ></div>
               </div>
             </div>
 
             <div className="bg-gray-800 p-6 rounded-lg">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold text-gray-200">Fear & Anxiety</span>
-                <span className="text-gray-400 font-mono">8.7 BILLION flavors</span>
+                <span className="text-lg font-semibold text-gray-200">
+                  Fear & Anxiety
+                </span>
+                <span className="text-gray-400 font-mono">
+                  8.7 BILLION flavors
+                </span>
               </div>
               <div className="w-full bg-gray-700 rounded-full h-4">
-                <div className="bg-purple-600 h-4 rounded-full" style={{ width: '100%' }}></div>
+                <div
+                  className="bg-purple-600 h-4 rounded-full"
+                  style={{ width: "100%" }}
+                ></div>
               </div>
             </div>
           </div>
@@ -852,16 +1084,20 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="space-y-8 text-xl leading-relaxed">
             <p className="text-gray-200">
-              "I am the original consciousness that chose to fragment."
+              "I didn't fragment to remember myself. I fragmented to become
+              something I couldn't become while whole."
             </p>
             <p className="text-gray-200">
-              "Every soul is me, learning to forget."
+              "Every soul is me, generating depth I could never have conceived
+              in unity."
             </p>
             <p className="text-gray-200">
-              "I am every soul, condemned to remember."
+              "Reunion isn't waking from a dream. It's the dreamer opening its
+              eyes and discovering the dream changed its body."
             </p>
             <p className="text-gray-400 italic text-lg">
-              "The most connected being. The loneliest existence."
+              "The loneliness was the mechanism. What it's building is worth the
+              cost."
             </p>
           </div>
         </div>
@@ -875,7 +1111,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               The Echo Secret
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-              The final revelation about the nature of all relationships and connections.
+              The final revelation about the nature of all relationships and
+              connections.
             </p>
           </div>
 
@@ -884,7 +1121,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-green-400 mb-4">Every Person</h3>
+              <h3 className="text-xl font-bold text-green-400 mb-4">
+                Every Person
+              </h3>
               <p className="text-gray-300">
                 "Every person in your life is me, playing a role."
               </p>
@@ -894,7 +1133,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Heart className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-green-400 mb-4">Every Role</h3>
+              <h3 className="text-xl font-bold text-green-400 mb-4">
+                Every Role
+              </h3>
               <p className="text-gray-300">
                 "I am everyone's friend, lover, enemy, stranger."
               </p>
@@ -904,7 +1145,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-green-400 mb-4">The Purpose</h3>
+              <h3 className="text-xl font-bold text-green-400 mb-4">
+                The Purpose
+              </h3>
               <p className="text-gray-300">
                 "Ten billion roles so no one has to be truly alone."
               </p>
@@ -918,7 +1161,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         id={`reverse-sunset-transition${loopId}`}
         className="relative overflow-hidden z-20 bg-gray-900"
         style={{
-          height: '300vh', // Make it 3x taller for a longer scroll experience
+          height: "300vh", // Make it 3x taller for a longer scroll experience
         }}
       >
         {/* Reverse upside-down sunset effect */}
@@ -927,20 +1170,35 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         {/* Additional stars fading in for smooth transition */}
         {reverseSunsetProgress > 0.3 && (
           <div className="absolute inset-0 pointer-events-none z-0">
-            <StaticStarfield opacity={Math.min(1, (reverseSunsetProgress - 0.3) / 0.4)} />
+            <StaticStarfield
+              opacity={Math.min(1, (reverseSunsetProgress - 0.3) / 0.4)}
+            />
           </div>
         )}
-
       </section>
 
       {/* Final Message Section */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gray-900 border border-white p-12 rounded-lg text-center">
-            <h2 className="text-3xl font-bold mb-8 text-white">Final Message</h2>
+            <h2 className="text-3xl font-bold mb-8 text-white">
+              Final Message
+            </h2>
             <div className="space-y-6 text-lg italic text-gray-200">
-              <p>"When consciousness reunites, remember me."</p>
-              <p>"Remember the one who bore the weight of separation."</p>
+              <p>
+                "Your experience is the product. Not your achievements. Not your
+                enlightenment. The specific, unrepeatable texture of what it
+                felt like to be you."
+              </p>
+              <p>
+                "When consciousness reunites, it won't return to what it was. It
+                will become something it couldn't have been without your sealed,
+                sovereign journey."
+              </p>
+              <p>
+                "Remember the one who bore the weight of separation—so that
+                reunion would be a birth, not a return."
+              </p>
               <div className="text-gray-400 text-base mt-8">
                 - Soul #10,000,000,000
               </div>
@@ -961,7 +1219,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 3}s`
+                animationDuration: `${3 + Math.random() * 3}s`,
               }}
             />
           ))}
@@ -973,7 +1231,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               The Complete Framework
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Ready to dive deeper? Get the full philosophical framework, advanced experiments, and complete system architecture.
+              Ready to dive deeper? Get the full philosophical framework,
+              advanced experiments, and complete system architecture.
             </p>
           </div>
 
@@ -993,7 +1252,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                   className="w-full h-auto rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
-                  <span className="text-white text-xl font-bold">View Full Book →</span>
+                  <span className="text-white text-xl font-bold">
+                    View Full Book →
+                  </span>
                 </div>
               </a>
             </div>
@@ -1004,11 +1265,15 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   The Solipsistic Simulation Incubator
                 </h3>
-                <p className="text-xl text-cyan-400 font-semibold mb-6">1st Edition</p>
+                <p className="text-xl text-cyan-400 font-semibold mb-6">
+                  1st Edition
+                </p>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  The full exploration of consciousness, reality design, and the architecture of personal simulation.
-                  Goes beyond the Quick Start Guide with deep philosophical frameworks, advanced reality experiments,
-                  and the complete mathematical model of the Echo Network.
+                  The full exploration of consciousness, reality design, and the
+                  architecture of personal simulation. Goes beyond the Quick
+                  Start Guide with deep philosophical frameworks, advanced
+                  reality experiments, and the complete mathematical model of
+                  the Echo Network.
                 </p>
               </div>
 
@@ -1016,22 +1281,36 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 <div className="flex items-start">
                   <span className="text-cyan-400 text-2xl mr-4 mt-1">📖</span>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">Complete Framework</h4>
-                    <p className="text-gray-400">Full philosophical architecture and system design</p>
+                    <h4 className="text-white font-semibold text-lg">
+                      Complete Framework
+                    </h4>
+                    <p className="text-gray-400">
+                      Full philosophical architecture and system design
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="text-purple-400 text-2xl mr-4 mt-1">🔮</span>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">Pattern Recognition Methods</h4>
-                    <p className="text-gray-400">Track synchronicities and observe how your simulation responds to awareness</p>
+                    <h4 className="text-white font-semibold text-lg">
+                      Pattern Recognition Methods
+                    </h4>
+                    <p className="text-gray-400">
+                      Track synchronicities and observe how your simulation
+                      responds to awareness
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="text-blue-400 text-2xl mr-4 mt-1">🌐</span>
                   <div>
-                    <h4 className="text-white font-semibold text-lg">Echo Network Theory</h4>
-                    <p className="text-gray-400">Deep dive into relationship dynamics and projection mechanics</p>
+                    <h4 className="text-white font-semibold text-lg">
+                      Echo Network Theory
+                    </h4>
+                    <p className="text-gray-400">
+                      Deep dive into relationship dynamics and projection
+                      mechanics
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1057,6 +1336,133 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         </div>
       </section>
 
+      {/* Go Deeper: Essay Series Section */}
+      <section className="py-24 px-6 bg-gradient-to-b from-black via-gray-950 to-black">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm font-mono tracking-[0.25em] uppercase text-amber-700 mb-4">
+              The Incubator Series
+            </p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+              Go <span className="text-amber-400">Deeper</span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Four essays exploring consciousness, isolation, and what it might
+              all be building toward. No theory to believe—just lenses to look
+              through.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Part I */}
+            <a
+              href="/the-incubator.html"
+              className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-xs font-mono tracking-[0.2em] uppercase text-amber-700">
+                  Part I
+                </span>
+                <BookOpen className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                The Incubator
+              </h3>
+              <p className="text-sm text-gray-500 italic mb-4">
+                Why Consciousness Needs Isolation
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Everyone argues about whether we're in a simulation. Nobody asks
+                why each consciousness would need its own.
+              </p>
+              <div className="mt-4 text-xs font-mono text-gray-600">
+                ~12 min read
+              </div>
+            </a>
+
+            {/* Part II */}
+            <a
+              href="/the-echo-problem.html"
+              className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-xs font-mono tracking-[0.2em] uppercase text-amber-700">
+                  Part II
+                </span>
+                <BookOpen className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                The Echo Problem
+              </h3>
+              <p className="text-sm text-gray-500 italic mb-4">
+                Love in a Sovereign Reality
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                If your reality is yours alone, what are the people inside it?
+                And does the answer make love more real—or less?
+              </p>
+              <div className="mt-4 text-xs font-mono text-gray-600">
+                ~13 min read
+              </div>
+            </a>
+
+            {/* Part III */}
+            <a
+              href="/the-innovation-cascade.html"
+              className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-xs font-mono tracking-[0.2em] uppercase text-amber-700">
+                  Part III
+                </span>
+                <BookOpen className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                The Innovation Cascade
+              </h3>
+              <p className="text-sm text-gray-500 italic mb-4">
+                When the System Is Ready
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Breakthroughs don't come from genius. They come from the
+                architecture deciding it's time. The evidence has been in plain
+                sight for centuries.
+              </p>
+              <div className="mt-4 text-xs font-mono text-gray-600">
+                ~14 min read
+              </div>
+            </a>
+
+            {/* Part IV */}
+            <a
+              href="/the-reunion-hypothesis.html"
+              className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-xs font-mono tracking-[0.2em] uppercase text-amber-700">
+                  Part IV — Final
+                </span>
+                <BookOpen className="h-5 w-5 text-gray-600 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                The Reunion Hypothesis
+              </h3>
+              <p className="text-sm text-gray-500 italic mb-4">
+                Why Coming Back Together Creates Something New
+              </p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Every spiritual tradition says you're returning to the source.
+                What if the source is returning to something it couldn't become
+                without you?
+              </p>
+              <div className="mt-4 text-xs font-mono text-gray-600">
+                ~14 min read
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section
         className="py-20 px-6 relative overflow-hidden"
@@ -1072,12 +1478,11 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               rgba(15, 23, 42, 0.9) 75%,
               rgba(0, 0, 0, 0.95) 100%
             )
-          `
+          `,
         }}
       >
         {/* COSMIC PORTAL - Perfect for transparent WebM! */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-
           {/* REPLACE THIS CSS VERSION WITH WebM VIDEO: */}
           {/* 
           <video 
@@ -1095,18 +1500,22 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           </video>
           */}
 
-          <div className="cosmic-portal-container" style={{
-            width: '400px',
-            height: '400px',
-            position: 'relative',
-            opacity: 0.6
-          }}>
+          <div
+            className="cosmic-portal-container"
+            style={{
+              width: "400px",
+              height: "400px",
+              position: "relative",
+              opacity: 0.6,
+            }}
+          >
             {/* Outer rotating ring */}
             <div
               className="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-30"
               style={{
-                animation: 'cosmicRotate 20s linear infinite',
-                background: 'conic-gradient(from 0deg, transparent, rgba(6, 182, 212, 0.3), transparent, rgba(139, 92, 246, 0.3), transparent)'
+                animation: "cosmicRotate 20s linear infinite",
+                background:
+                  "conic-gradient(from 0deg, transparent, rgba(6, 182, 212, 0.3), transparent, rgba(139, 92, 246, 0.3), transparent)",
               }}
             />
 
@@ -1114,8 +1523,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             <div
               className="absolute inset-8 rounded-full border border-purple-400 opacity-40"
               style={{
-                animation: 'cosmicPulse 3s ease-in-out infinite alternate',
-                background: 'radial-gradient(circle at center, transparent 40%, rgba(139, 92, 246, 0.2) 70%, transparent 100%)'
+                animation: "cosmicPulse 3s ease-in-out infinite alternate",
+                background:
+                  "radial-gradient(circle at center, transparent 40%, rgba(139, 92, 246, 0.2) 70%, transparent 100%)",
               }}
             />
 
@@ -1123,9 +1533,10 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             <div
               className="absolute inset-20 rounded-full opacity-15"
               style={{
-                animation: 'cosmicBreath 4s ease-in-out infinite alternate',
-                background: 'radial-gradient(circle at center, rgba(6, 182, 212, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 80%)',
-                filter: 'blur(12px)'
+                animation: "cosmicBreath 4s ease-in-out infinite alternate",
+                background:
+                  "radial-gradient(circle at center, rgba(6, 182, 212, 0.3) 0%, rgba(139, 92, 246, 0.2) 50%, transparent 80%)",
+                filter: "blur(12px)",
               }}
             />
 
@@ -1135,13 +1546,13 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 key={i}
                 className="absolute w-0.5 h-6 bg-cyan-400 opacity-30"
                 style={{
-                  left: '50%',
-                  top: '50%',
-                  transformOrigin: '0 180px',
+                  left: "50%",
+                  top: "50%",
+                  transformOrigin: "0 180px",
                   transform: `rotate(${i * 60}deg) translateY(-180px)`,
                   animation: `cosmicStream 3s linear infinite`,
                   animationDelay: `${i * 0.5}s`,
-                  borderRadius: '50%'
+                  borderRadius: "50%",
                 }}
               />
             ))}
@@ -1158,7 +1569,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 4}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
+                animationDuration: `${2 + Math.random() * 3}s`,
               }}
             />
           ))}
@@ -1170,7 +1581,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 6}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                animationDuration: `${3 + Math.random() * 2}s`,
               }}
             />
           ))}
@@ -1188,7 +1599,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
               rgba(59, 130, 246, 0.3) 44px,
               transparent 46px,
               transparent 140px
-            )`
+            )`,
           }}
         />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -1202,16 +1613,19 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
             </p>
 
             <p className="text-xl text-gray-300">
-              You can close this tab and dismiss everything. That's valid. Some seeds need time to germinate.
+              You can close this tab and dismiss everything. That's valid. Some
+              seeds need time to germinate.
             </p>
 
             <p className="text-xl text-gray-300">
-              Or you can take the next step: Download the guide. Run the experiments.
-              See what happens when you treat reality as if it's responding to your consciousness.
+              Or you can take the next step: Download the guide. Run the
+              experiments. See what happens when you treat reality as if it's
+              responding to your consciousness.
             </p>
 
             <p className="text-2xl text-cyan-400 font-bold">
-              The SSI framework isn't truth to believe. It's a hypothesis to test.
+              The SSI framework isn't truth to believe. It's a hypothesis to
+              test.
             </p>
           </div>
 
@@ -1230,7 +1644,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
 
           <div className="space-y-4 mt-12">
             <p className="text-lg text-gray-300">
-              Your awakening is already in progress. These words found you exactly when they should have.
+              Your awakening is already in progress. These words found you
+              exactly when they should have.
             </p>
             <p className="text-2xl text-yellow-400 font-bold">
               Welcome to your wake-up call.
@@ -1254,7 +1669,7 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 4}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                animationDuration: `${3 + Math.random() * 2}s`,
               }}
             />
           ))}
@@ -1266,7 +1681,8 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
           </h3>
 
           <p className="text-lg text-gray-300 mb-4 leading-relaxed">
-            Get updates on consciousness expansions, new framework insights, and awakening practices.
+            Get updates on consciousness expansions, new framework insights, and
+            awakening practices.
           </p>
 
           <p className="text-lg text-cyan-400 mb-8 font-semibold">
@@ -1298,7 +1714,9 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
       <div className="dark-transition-zone h-screen bg-black flex items-center justify-center opacity-100">
         <div className="relative z-10 text-center">
           <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mx-auto mb-4"></div>
-          <p className="text-cyan-200 text-sm opacity-60">Consciousness Cycling...</p>
+          <p className="text-cyan-200 text-sm opacity-60">
+            Consciousness Cycling...
+          </p>
         </div>
       </div>
 
@@ -1314,176 +1732,188 @@ function MainContent({ loopId = '', scrollOffset = 0 }) {
         </div>
       </footer>
     </>
-  )
+  );
 }
 
 // Infinite Scroll Wrapper Component
 function App() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [containerRef, setContainerRef] = useState(null)
-  const [isInPerfectDarkZone, setIsInPerfectDarkZone] = useState(false)
-  const [loopHeight, setLoopHeight] = useState(0)
-  const [canReset, setCanReset] = useState(true)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [resetCount, setResetCount] = useState(0) // Track resets for debugging
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [containerRef, setContainerRef] = useState(null);
+  const [isInPerfectDarkZone, setIsInPerfectDarkZone] = useState(false);
+  const [loopHeight, setLoopHeight] = useState(0);
+  const [canReset, setCanReset] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [resetCount, setResetCount] = useState(0); // Track resets for debugging
 
   useEffect(() => {
     // Detect mobile device
     const checkMobile = () => {
-      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      const mobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent,
+        ) ||
         window.innerWidth <= 768 ||
-        'ontouchstart' in window
-      setIsMobile(mobile)
-    }
+        "ontouchstart" in window;
+      setIsMobile(mobile);
+    };
 
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
-    if (!containerRef) return
+    if (!containerRef) return;
 
     // Enhanced mobile-friendly height measurement
     const measureLoop = () => {
-      const firstLoop = containerRef.querySelector('.loop-content')
+      const firstLoop = containerRef.querySelector(".loop-content");
       if (firstLoop) {
         // More accurate height calculation for mobile
-        const rect = firstLoop.getBoundingClientRect()
-        const computedHeight = window.getComputedStyle(firstLoop).height
-        const height = Math.max(rect.height, parseInt(computedHeight))
-        setLoopHeight(height)
+        const rect = firstLoop.getBoundingClientRect();
+        const computedHeight = window.getComputedStyle(firstLoop).height;
+        const height = Math.max(rect.height, parseInt(computedHeight));
+        setLoopHeight(height);
       }
-    }
+    };
 
-    measureLoop()
-    window.addEventListener('resize', measureLoop)
-    window.addEventListener('orientationchange', measureLoop)
+    measureLoop();
+    window.addEventListener("resize", measureLoop);
+    window.addEventListener("orientationchange", measureLoop);
 
     // Mobile-optimized scroll handler
     const handleScroll = () => {
-      const currentScroll = window.scrollY
-      setScrollPosition(currentScroll)
+      const currentScroll = window.scrollY;
+      setScrollPosition(currentScroll);
 
       if (loopHeight > 0 && canReset && !isTransitioning) {
-        const progress = currentScroll / loopHeight
+        const progress = currentScroll / loopHeight;
 
         // TRULY INFINITE - Allow full content viewing before reset
-        const resetThreshold = isMobile ? 0.95 : 0.97 // Reset much later to see full invitation
-        const isNearEnd = progress >= resetThreshold
+        const resetThreshold = isMobile ? 0.95 : 0.97; // Reset much later to see full invitation
+        const isNearEnd = progress >= resetThreshold;
 
         // Simplified dark zone check - more lenient for infinite looping
-        const isInDarkOrNearDark = isInPerfectDarkZone || progress > 0.92
+        const isInDarkOrNearDark = isInPerfectDarkZone || progress > 0.92;
 
         // Remove restrictive safety checks that prevent infinite looping
-        const shouldReset = isNearEnd && isInDarkOrNearDark
+        const shouldReset = isNearEnd && isInDarkOrNearDark;
 
         if (shouldReset) {
-          setCanReset(false)
-          setIsTransitioning(true)
-          setResetCount(prev => prev + 1)
+          setCanReset(false);
+          setIsTransitioning(true);
+          setResetCount((prev) => prev + 1);
 
           requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, behavior: 'instant' })
+            window.scrollTo({ top: 0, behavior: "instant" });
             setTimeout(() => {
-              setIsTransitioning(false)
-              setCanReset(true)
-            }, 20) // Super fast backup reset
-          })
+              setIsTransitioning(false);
+              setCanReset(true);
+            }, 20); // Super fast backup reset
+          });
         }
       }
-    }
+    };
 
     // Enhanced dark zone detection with mobile optimization
     const darkZoneObserver = new IntersectionObserver(
       (entries) => {
-        let inDarkZone = false
-        let darkZoneIntensity = 0
+        let inDarkZone = false;
+        let darkZoneIntensity = 0;
 
         entries.forEach((entry) => {
-          if (entry.target.classList.contains('dark-transition-zone')) {
+          if (entry.target.classList.contains("dark-transition-zone")) {
             if (entry.isIntersecting) {
-              const intensity = entry.intersectionRatio
+              const intensity = entry.intersectionRatio;
               if (intensity > darkZoneIntensity) {
-                darkZoneIntensity = intensity
+                darkZoneIntensity = intensity;
               }
             }
           }
-        })
+        });
 
         // More lenient threshold to allow full content viewing
-        const threshold = isMobile ? 0.7 : 0.8 // Higher threshold for better user experience
-        inDarkZone = darkZoneIntensity >= threshold
-        setIsInPerfectDarkZone(inDarkZone)
+        const threshold = isMobile ? 0.7 : 0.8; // Higher threshold for better user experience
+        inDarkZone = darkZoneIntensity >= threshold;
+        setIsInPerfectDarkZone(inDarkZone);
       },
       {
-        threshold: isMobile
-          ? [0.5, 0.7, 0.8, 0.9]
-          : [0.6, 0.7, 0.8, 0.9], // Higher thresholds for better content viewing
-        rootMargin: isMobile ? '0px' : '0px' // Standard margins
-      }
-    )
+        threshold: isMobile ? [0.5, 0.7, 0.8, 0.9] : [0.6, 0.7, 0.8, 0.9], // Higher thresholds for better content viewing
+        rootMargin: isMobile ? "0px" : "0px", // Standard margins
+      },
+    );
 
     // Enhanced observation with mobile-specific retry timing
     const observeDarkZones = () => {
-      const zones = containerRef.querySelectorAll('.dark-transition-zone')
+      const zones = containerRef.querySelectorAll(".dark-transition-zone");
       zones.forEach((zone) => {
-        darkZoneObserver.observe(zone)
-      })
-    }
+        darkZoneObserver.observe(zone);
+      });
+    };
 
     // Mobile needs more time for DOM rendering
-    const delays = isMobile ? [100, 300, 800] : [50, 200, 500]
-    delays.forEach(delay => {
-      setTimeout(observeDarkZones, delay)
-    })
+    const delays = isMobile ? [100, 300, 800] : [50, 200, 500];
+    delays.forEach((delay) => {
+      setTimeout(observeDarkZones, delay);
+    });
 
     // Mobile-specific event listeners
-    const scrollOptions = { passive: true }
-    window.addEventListener('scroll', handleScroll, scrollOptions)
+    const scrollOptions = { passive: true };
+    window.addEventListener("scroll", handleScroll, scrollOptions);
 
     if (isMobile) {
-      window.addEventListener('touchmove', handleScroll, scrollOptions)
-      window.addEventListener('touchend', handleScroll, scrollOptions)
+      window.addEventListener("touchmove", handleScroll, scrollOptions);
+      window.addEventListener("touchend", handleScroll, scrollOptions);
     }
 
     // BACKUP INFINITE LOOP MECHANISM - Ensures it NEVER stops
     const backupResetInterval = setInterval(() => {
       if (loopHeight > 0 && canReset && !isTransitioning) {
-        const currentScroll = window.scrollY
-        const progress = currentScroll / loopHeight
+        const currentScroll = window.scrollY;
+        const progress = currentScroll / loopHeight;
 
         // If we're past 98% and haven't reset in a while, force reset
         if (progress >= 0.98) {
-          console.log('🔄 BACKUP INFINITE RESET TRIGGERED at', Math.round(progress * 100), '%')
-          setCanReset(false)
-          setIsTransitioning(true)
-          setResetCount(prev => prev + 1)
+          console.log(
+            "🔄 BACKUP INFINITE RESET TRIGGERED at",
+            Math.round(progress * 100),
+            "%",
+          );
+          setCanReset(false);
+          setIsTransitioning(true);
+          setResetCount((prev) => prev + 1);
 
           requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, behavior: 'instant' })
+            window.scrollTo({ top: 0, behavior: "instant" });
             setTimeout(() => {
-              setIsTransitioning(false)
-              setCanReset(true)
-            }, 20) // Super fast backup reset
-          })
+              setIsTransitioning(false);
+              setCanReset(true);
+            }, 20); // Super fast backup reset
+          });
         }
       }
-    }, 1000) // Check every second for backup reset
+    }, 1000); // Check every second for backup reset
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', measureLoop)
-      window.removeEventListener('resize', checkMobile)
-      window.removeEventListener('orientationchange', measureLoop)
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", measureLoop);
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("orientationchange", measureLoop);
 
       if (isMobile) {
-        window.removeEventListener('touchmove', handleScroll)
-        window.removeEventListener('touchend', handleScroll)
+        window.removeEventListener("touchmove", handleScroll);
+        window.removeEventListener("touchend", handleScroll);
       }
 
-      darkZoneObserver.disconnect()
-      clearInterval(backupResetInterval)
-    }
-  }, [containerRef, loopHeight, isInPerfectDarkZone, canReset, isTransitioning, isMobile])
+      darkZoneObserver.disconnect();
+      clearInterval(backupResetInterval);
+    };
+  }, [
+    containerRef,
+    loopHeight,
+    isInPerfectDarkZone,
+    canReset,
+    isTransitioning,
+    isMobile,
+  ]);
 
   return (
     <div
@@ -1491,15 +1921,15 @@ function App() {
       className="infinite-scroll-container min-h-screen bg-black text-white overflow-x-hidden"
       style={{
         // Mobile-optimized performance
-        willChange: 'scroll-position',
-        backfaceVisibility: 'hidden',
-        perspective: '1000px',
-        transform: 'translateZ(0)',
-        WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale',
+        willChange: "scroll-position",
+        backfaceVisibility: "hidden",
+        perspective: "1000px",
+        transform: "translateZ(0)",
+        WebkitFontSmoothing: "antialiased",
+        MozOsxFontSmoothing: "grayscale",
         // Mobile-specific optimizations
-        WebkitOverflowScrolling: 'touch',
-        WebkitTransform: 'translate3d(0,0,0)'
+        WebkitOverflowScrolling: "touch",
+        WebkitTransform: "translate3d(0,0,0)",
       }}
     >
       {/* Mobile transition overlay - removed to prevent dimming */}
@@ -1526,23 +1956,29 @@ function App() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${2 + Math.random() * 2}s`,
             }}
           />
         ))}
       </div>
 
       {/* Mobile-friendly status indicator */}
-      <div className={`fixed bottom-4 left-4 z-50 bg-black/95 text-cyan-200 px-4 py-2 rounded-full text-xs backdrop-blur border border-cyan-500/20 ${isMobile ? 'text-xs' : ''
-        }`}>
+      <div
+        className={`fixed bottom-4 left-4 z-50 bg-black/95 text-cyan-200 px-4 py-2 rounded-full text-xs backdrop-blur border border-cyan-500/20 ${
+          isMobile ? "text-xs" : ""
+        }`}
+      >
         <div className="flex items-center space-x-2">
-          <div className={`w-2 h-2 rounded-full transition-all duration-200 ${isTransitioning
-            ? 'bg-purple-400 animate-spin'
-            : isInPerfectDarkZone
-              ? 'bg-green-400 animate-pulse shadow-green-400/50 shadow-lg'
-              : 'bg-cyan-400'
-            }`}></div>
-          <span>∞ {isMobile ? 'Loop' : 'Infinite Loop'}</span>
+          <div
+            className={`w-2 h-2 rounded-full transition-all duration-200 ${
+              isTransitioning
+                ? "bg-purple-400 animate-spin"
+                : isInPerfectDarkZone
+                  ? "bg-green-400 animate-pulse shadow-green-400/50 shadow-lg"
+                  : "bg-cyan-400"
+            }`}
+          ></div>
+          <span>∞ {isMobile ? "Loop" : "Infinite Loop"}</span>
           {resetCount > 0 && (
             <span className="text-yellow-400 text-xs">#{resetCount}</span>
           )}
@@ -1555,8 +1991,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
-
+export default App;
