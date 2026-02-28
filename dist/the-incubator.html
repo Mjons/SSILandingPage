@@ -276,6 +276,18 @@
         font-style: italic;
       }
 
+      .article-footer a {
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.3s ease;
+      }
+      .article-footer a:hover {
+        opacity: 0.8;
+      }
+      .article-footer a:hover .next-title {
+        text-decoration: underline;
+      }
+
       /* ── Animations ── */
       @keyframes fadeUp {
         from {
@@ -689,12 +701,14 @@
 
     <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
     <footer class="article-footer">
-      <p>
-        <span class="next-label">Next in this series</span><br />
-        <span class="next-title"
-          >Part II: Love in a Sovereign Reality — The Echo Problem</span
-        >
-      </p>
+      <a href="the-echo-problem.html">
+        <p>
+          <span class="next-label">Next in this series</span><br />
+          <span class="next-title"
+            >Part II: Love in a Sovereign Reality — The Echo Problem</span
+          >
+        </p>
+      </a>
     </footer>
 
     <!-- ═══════════════════════════ SCROLL REVEAL ═══════════════════════════ -->

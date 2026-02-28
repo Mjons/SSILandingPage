@@ -328,6 +328,18 @@
         font-style: italic;
       }
 
+      .article-footer a {
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.3s ease;
+      }
+      .article-footer a:hover {
+        opacity: 0.8;
+      }
+      .article-footer a:hover .prev-title {
+        text-decoration: underline;
+      }
+
       .series-end {
         margin-top: 2.5rem;
         padding-top: 1.5rem;
@@ -913,12 +925,14 @@
 
     <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
     <footer class="article-footer">
-      <p>
-        <span class="prev-label">Previously</span><br />
-        <span class="prev-title"
-          >Part III: The Innovation Cascade — When the System Is Ready</span
-        >
-      </p>
+      <a href="the-innovation-cascade.html">
+        <p>
+          <span class="prev-label">Previously</span><br />
+          <span class="prev-title"
+            >Part III: The Innovation Cascade — When the System Is Ready</span
+          >
+        </p>
+      </a>
       <p class="series-end">
         End of series — The Incubator: Four Essays on Consciousness, Isolation,
         and What It Might All Be Building Toward

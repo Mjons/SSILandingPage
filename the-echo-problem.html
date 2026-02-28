@@ -296,6 +296,19 @@
         font-style: italic;
       }
 
+      .article-footer a {
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.3s ease;
+      }
+      .article-footer a:hover {
+        opacity: 0.8;
+      }
+      .article-footer a:hover .next-title,
+      .article-footer a:hover .prev-title {
+        text-decoration: underline;
+      }
+
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -833,18 +846,22 @@
 
     <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
     <footer class="article-footer">
-      <p>
-        <span class="prev-label">Previously</span><br />
-        <span class="prev-title"
-          >Part I: The Incubator — Why Consciousness Needs Isolation</span
-        >
-      </p>
-      <p>
-        <span class="next-label">Next in this series</span><br />
-        <span class="next-title"
-          >Part III: The Innovation Cascade — When the System Is Ready</span
-        >
-      </p>
+      <a href="the-incubator.html">
+        <p>
+          <span class="prev-label">Previously</span><br />
+          <span class="prev-title"
+            >Part I: The Incubator — Why Consciousness Needs Isolation</span
+          >
+        </p>
+      </a>
+      <a href="the-innovation-cascade.html">
+        <p>
+          <span class="next-label">Next in this series</span><br />
+          <span class="next-title"
+            >Part III: The Innovation Cascade — When the System Is Ready</span
+          >
+        </p>
+      </a>
     </footer>
 
     <!-- ═══════════════════════════ SCROLL REVEAL ═══════════════════════════ -->
