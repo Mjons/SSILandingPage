@@ -1356,7 +1356,7 @@ function MainContent({ loopId = "", scrollOffset = 0 }) {
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {/* Part I */}
             <a
-              href="/the-incubator.html"
+              href={`${import.meta.env.BASE_URL}the-incubator.html`}
               className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
             >
               <div className="flex items-start justify-between mb-4">
@@ -1382,7 +1382,7 @@ function MainContent({ loopId = "", scrollOffset = 0 }) {
 
             {/* Part II */}
             <a
-              href="/the-echo-problem.html"
+              href={`${import.meta.env.BASE_URL}the-echo-problem.html`}
               className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
             >
               <div className="flex items-start justify-between mb-4">
@@ -1408,7 +1408,7 @@ function MainContent({ loopId = "", scrollOffset = 0 }) {
 
             {/* Part III */}
             <a
-              href="/the-innovation-cascade.html"
+              href={`${import.meta.env.BASE_URL}the-innovation-cascade.html`}
               className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
             >
               <div className="flex items-start justify-between mb-4">
@@ -1435,7 +1435,7 @@ function MainContent({ loopId = "", scrollOffset = 0 }) {
 
             {/* Part IV */}
             <a
-              href="/the-reunion-hypothesis.html"
+              href={`${import.meta.env.BASE_URL}the-reunion-hypothesis.html`}
               className="group block p-8 rounded-xl border border-gray-800 hover:border-amber-800/60 bg-gray-900/50 hover:bg-gray-900/80 transition-all duration-500"
             >
               <div className="flex items-start justify-between mb-4">
